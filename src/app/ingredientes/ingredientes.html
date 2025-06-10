@@ -1,0 +1,43 @@
+   
+   <table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Calorías</th>
+      <th>Proteínas</th>
+      <th>Grasas</th>
+      <th>Carbohidratos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{ item.nombre }}</td>
+      <td>{{ item.calorias }}</td>
+      <td>{{ item.proteinas }}</td>
+      <td>{{ item.grasas }}</td>
+      <td>{{ item.carbohidratos }}</td>
+      <td>
+        <button (click)="eliminarItem(item.id)">Eliminar</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+    <button (click) = "actualizarLista()">aaa</button>
+
+      <label>Nombre</label>
+      <input [formControl] = "nombre">
+
+      <label>Calorias</label>
+      <input [formControl] = "calorias">
+
+      <label>Proteinas</label>
+      <input [formControl] = "proteinas">
+
+      <label>Carbohidratos</label>
+      <input [formControl] = "carbohidratos">
+    
+      <label>Grasas</label>
+      <input [formControl] = "grasas">
+    
+      <button (click)="botonCrearIngrediente()">Agregar</button>

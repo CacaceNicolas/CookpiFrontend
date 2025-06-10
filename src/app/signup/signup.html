@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+  <header>
+    <img src="lupa.png" alt="Buscar" class="icon" />
+    <img src="cerrar.png" alt="Cerrar" class="icon" />
+  </header>
+
+  <main>
+    <h1>Crear cuenta</h1>
+
+    <form class="login-form">
+      <label for="usuario">Nombre de Usuario</label>
+      <input [formControl] = "nombre" type="text" id="usuario" name="usuario">
+
+      <label for="password">Pasword</label>
+      <input [formControl] = "password" type="password" id="password" name="password">
+
+      <label for="gmail">Gmail</label>
+      <input [formControl] = "mail" type="email" id="gmail" name="gmail">
+
+      <button (click) = "botonCrearUsuario()" type="submit">Registrarse</button>
+    </form>
+
+    <a href="http://localhost:4200/login">Ya tenés cuenta?</a>
+
+    <div class="mensaje">
+      Cargá tu perfil para recibir <br> recomendaciones
+    </div>
+
+    <section class="perfil-form">
+      <form>
+        <label for="peso">Peso En Gramos</label>
+        <input type="number" id="peso" name="peso">
+
+        <label for="altura">Altura</label>
+        <input type="text" id="altura" name="altura">
+
+        <label for="actividad">Nivel De Actividad</label>
+        <input type="text" id="actividad" name="actividad">
+
+        <label for="pais">País</label>
+        <input type="text" id="pais" name="pais">
+
+        <button type="submit">Cargar Perfil</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <span>Volver arriba ↑</span>
+    <span>|</span>
+    <span>Términos y Condiciones</span>
+    <span>|</span>
+    <span>Contacto</span>
+  </footer>
+
+  <div class="copyright">
+    Copyright © 2025 Nacom, Inc. Todos los derechos reservados.
+  </div>
+</body>
+</html>

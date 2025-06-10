@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SignIn</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <header>
+    <img src="lupa.png" alt="Buscar" class="icon" />
+    <img src="cerrar.png" alt="Cerrar" class="icon" />
+  </header>
+
+  <main>
+    <h1>Iniciar sesión</h1>
+    <form>
+      <label for="usuario">Nombre de Usuario o email</label>
+      <input [formControl] = "nombre" type="text" id="usuario" name="usuario" />
+
+      <label for="password">Pasword</label>
+      <input [formControl] = "password" type="password" id="password" name="password" />
+
+      <button (click) = "botonIniciarSesion()" type="submit">Iniciar sesión</button>
+    </form>
+    <a href="http://localhost:4200/signup">Creá tu cuenta</a>
+    <p></p>
+    <a href="http://localhost:4200/enviarCorreoPassword">Olvidaste tu contraseña?</a>
+  </main>
+
+  <footer>
+    <span>Volver arriba ↑</span>
+    <span>|</span>
+    <span>Términos y Condiciones</span>
+    <span>|</span>
+    <span>Contacto</span>
+  </footer>
+
+  <div class="copyright">
+    Copyright © 2025 Nacom, Inc. Todos los derechos reservados.
+  </div>
+</body>
+</html>
