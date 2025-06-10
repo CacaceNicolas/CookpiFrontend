@@ -33,6 +33,15 @@ export class Ingredientes {
     this.actualizarLista()
   }
 
+  async modItem(id:string, value :any){
+    if(this.nombre.value){
+
+      this.apiservice.modIngrediente(id, value, this.nombre.value);
+    }
+    
+    await this.actualizarLista();
+  }
+
 
   async botonCrearIngrediente() {
     

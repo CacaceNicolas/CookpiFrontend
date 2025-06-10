@@ -7,8 +7,8 @@ import { Ingredientes } from './ingredientes/ingredientes';
 
 export const routes: Routes = [
 
-    {path : "login", component: Login},
-    {path : "signup", component: Signup},
+    {path : "logni", component: Login},
+    {path : "singup", component: Signup},
     {path : "recuperarPassword/:token", component : RecuperarPassword},
     {path : "enviarCorreoPassword", component : EnviarCorreoPassword},
     {path : "ingredientes", component : Ingredientes} 
