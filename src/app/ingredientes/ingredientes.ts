@@ -9,8 +9,10 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
   templateUrl: './ingredientes.html',
   styleUrl: './ingredientes.css'
 })
-export class Ingredientes {
 
+
+
+export class Ingredientes {
 
   nombre = new FormControl('');
   calorias = new FormControl(0);
@@ -18,13 +20,44 @@ export class Ingredientes {
   grasas = new FormControl(0); 
   carbohidratos = new FormControl(0);
 
+  busqueda : string = "";
+  pagina : number = 0;
+
   constructor(private apiservice: Servicio) {}
 
   items : any[] = []
 
-  async actualizarLista() {
+  ngOnInit(){
+    this.actualizarLista()
+  }
+  
+  async restarPagina(){
+    if (this.pagina > 0){
+      this.pagina -= 1
+    }
+    this.actualizarLista()
+  }
 
-    this.items = await this.apiservice.getIngredientes();
+  async sumarPagina(){
+   
+    this.pagina += 1
+    
+
+
+    this.actualizarLista()
+  }
+
+
+  async actualizarLista() {
+    console.log(this.pagina)
+    const itemsAnterior = this.items;
+    this.items = await this.apiservice.getIngredientes(this.pagina, this.busqueda);
+    if (this.items.length == 0 && this.pagina > 0){
+      this.items = itemsAnterior
+      this.pagina -= 1
+    }
+
+
 
   }
 
@@ -65,5 +98,13 @@ export class Ingredientes {
   
   
   }
+
+
+
+  buscar(cadena : string){
+    this.busqueda = cadena
+    this.actualizarLista()
+  }
+
 
 }

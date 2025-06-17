@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="ingredientes.css" />
 </head>   
+
+<input type="search" #busquedaInput placeholder="Buscar ingrediente..." (keydown.enter)="buscar(busquedaInput.value)">
+
 <table border="1">
   <thead>
     <tr>
@@ -29,7 +32,9 @@
   </tbody>
 </table>
 
-    <button (click) = "actualizarLista()">aaa</button>
+    <button (click) = "sumarPagina()">mas</button>
+    <button (click) = "restarPagina()">menos</button>
+
 
       <label>Nombre</label>
       <input [formControl] = "nombre">

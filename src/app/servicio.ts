@@ -8,9 +8,7 @@ import axios from 'axios';
 export class Servicio {
   constructor() {}
 
-  ngOnInit(){
-    this.getIngredientes()
-  }
+
 
 
   async agregarIngrediente(nombre: string, calorias: number, proteinas: number, grasas: number, carbohidratos: number) {
@@ -29,7 +27,7 @@ export class Servicio {
 
   async eliminarIngrediente(id: string) {
     try {
-      const response = await axios.delete(`http://localhost:3000/ingrediente/${id}`);
+      const response = await axios.delete(`http://localhost:3000/ingrediente/${id}`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       return response.data;
     } catch (error) {
       console.error('Error al eliminar el ingrediente:', error);
@@ -42,7 +40,7 @@ export class Servicio {
       const resp = await axios.put('http://localhost:3000/ingrediente',{
         id : id,
         nombreValue : value
-      });
+      }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
 
     }catch(error){
       console.error("No se pudo cambiar el ingrediente", error);
@@ -50,9 +48,9 @@ export class Servicio {
   }
 
 
-  async getIngredientes() {
+  async getIngredientes(pagina : number, busqueda : string) {
     try {
-      const response = await axios.get('http://localhost:3000/ingrediente/3');
+      const response = await axios.get('http://localhost:3000/ingrediente/' + pagina + "/" + busqueda, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       return response.data;
     } catch (error) {
       console.error('Error al obtener los ingredientes:', error);
@@ -119,6 +117,16 @@ export class Servicio {
       });
   }
 
+
+  async verificarToken(){
+
+    if(localStorage.getItem("jwt")){
+      return axios.get("http://localhost:3000/checkLogIn", {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+    }
+    else{
+      return false
+    }
+  }
 
 
 }

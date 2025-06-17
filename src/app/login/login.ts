@@ -25,9 +25,9 @@ export class Login {
 
     if (this.nombre.value && this.password.value) {
       try {
+        console.log("ASDASD")
         const response = await this.apiservice.iniciarSesion(this.nombre.value, this.password.value);
-        console.log(response)
-        console.log('Inicio de sesión exitoso:', response);
+        localStorage.setItem("jwt", response)
       } catch (error) {
         console.error('Error al iniciar sesión:', error);
       }
