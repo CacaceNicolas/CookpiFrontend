@@ -14,13 +14,11 @@
   <main>
     <h1>Iniciar sesión</h1>
     <form>
-      <label for="usuario">Nombre de Usuario o email</label>
+      <label for="usuario">Nombre de Usuario</label>
       <input [formControl] = "nombre" type="text" id="usuario" />
 
       <label for="password">Pasword</label>
       <input [formControl] = "password" type="password" id="password" />
-
-
     </form>
 
     <button (click) = "botonIniciarSesion()">Iniciar sesión</button>

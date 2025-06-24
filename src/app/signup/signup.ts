@@ -25,7 +25,7 @@ export class Signup {
       try {
         
         const response = await this.apiservice.crearUsuario(this.nombre.value, this.password.value, this.mail.value);
-        console.log('Usuario creado exitosamente:', response);
+
       } catch (error) {
         console.error('Error al crear el usuario:', error);
       }
