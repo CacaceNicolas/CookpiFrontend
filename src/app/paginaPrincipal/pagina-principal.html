@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Página Principal</title>
+  <link rel="stylesheet" href="pagina-principal.css" />
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 class="logo">paginaPrincipal</h1>
+    <div class="icons">
+      <span class="icon">🔍</span>
+      <span class="icon">⚙️</span>
+    </div>
+  </header>
+
+  <nav class="categories">
+    <div class="category">CATEGORÍA 1</div>
+    <div class="category">CATEGORÍA 1</div>
+    <div class="category">CATEGORÍA 1</div>
+    <div class="category">CATEGORÍA 1</div>
+    <div class="category">CATEGORÍA 1</div>
+  </nav>
+
+  <section class="featured">
+    <div class="featured-image"></div>
+    <div class="featured-text">
+      <h2>Receta del día</h2>
+      <h3>NOMBRE RECETA</h3>
+      <p class="tiempo">tiempo prod.</p>
+      <p class="descripcion">
+        Típico de muchos países <br>
+        Los ingredientes que esta receta merece <br>
+        Haciendo de este postre inolvidable <br>
+        esta receta lleva el inconfundible <br>
+        perfume de la canela
+      </p>
+      <a href="#">continuar leyendo...</a>
+    </div>
+  </section>
+  
+  <section class="featured" *ngIf="recetaDestacada">
+  <div class="featured-image"></div>
+  <div class="featured-text">
+    <h2>Receta del día</h2>
+    <h3>{{ recetaDestacada.nombre }}</h3>
+    <p class="tiempo">{{ recetaDestacada.tiempo || 'tiempo estimado' }}</p>
+    <p class="descripcion">
+      Calorías: {{ recetaDestacada.calorias }}<br>
+      Proteínas: {{ recetaDestacada.proteinas }}<br>
+      Grasas: {{ recetaDestacada.grasas }}<br>
+      Carbohidratos: {{ recetaDestacada.carbohidratos }}
+    </p>
+  </div>
+</section>
+
+<section class="recomendaciones">
+  <h3>Recomendaciones para vos...</h3>
+  <div class="cards">
+    <div class="card" *ngFor="let receta of recetas">
+      <div class="card-img"></div>
+      <h4>{{ receta.nombre }}</h4>
+      <p>Calorías: {{ receta.calorias }}</p>
+      <p>Proteínas: {{ receta.proteinas }}</p>
+      <p>Grasas: {{ receta.grasas }}</p>
+      <p>Carbohidratos: {{ receta.carbohidratos }}</p>
+    </div>
+  </div>
+</section>
+
+  <section class="tendencias">
+    <h3>Tendencias</h3>
+    <div class="trend-list">
+      <div class="trend">
+        <div class="trend-img"></div>
+        <p class="tag">T categoría</p>
+        <h4>Nombre receta</h4>
+        <p>tiempo</p>
+      </div>
+      <div class="trend">
+        <div class="trend-img"></div>
+        <p class="tag">T categoría</p>
+        <h4>Nombre receta</h4>
+        <p>tiempo</p>
+      </div>
+      <div class="trend">
+        <div class="trend-img"></div>
+        <p class="tag">T categoría</p>
+        <h4>Nombre receta</h4>
+        <p>tiempo</p>
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
