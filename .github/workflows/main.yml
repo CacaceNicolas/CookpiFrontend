@@ -28,9 +28,14 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: enviroment
+        run: |
+          sed -i -e 's|URLPLACEHOLDER|${{ vars.url }}|g' src/app/servicio.ts
  
       - name: Build and push Docker image
         run: |
           IMAGE_OWNER_LC=$(echo $IMAGE_OWNER | tr '[:upper:]' '[:lower:]')
           docker build -t ghcr.io/$IMAGE_OWNER_LC/$IMAGE_NAME:latest -f Dockerfile .
           docker push ghcr.io/$IMAGE_OWNER_LC/$IMAGE_NAME:latest
+          
