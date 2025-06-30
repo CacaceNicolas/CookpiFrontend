@@ -7,7 +7,7 @@ on:
     branches: [ "main" ]
  
 env:
-  IMAGE_NAME: pokemon-guesser-frontend
+  IMAGE_NAME: cookpifrontend
   IMAGE_OWNER: ${{ github.repository_owner }}
  
 jobs:
@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.TOKEN }}
       - name: enviroment
         run: |
-          sed -i -e 's|placeholderURL|${{ vars.url }}|g' src/app/connection.service.ts
+          sed -i -e 's|placeholderURL|${{ vars.url }}|g' src/app/servicio.ts
  
       
  
