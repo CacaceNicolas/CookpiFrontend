@@ -4,6 +4,7 @@ import { Signup } from './signup/signup';
 import { RecuperarPassword } from './recuperar-password/recuperar-password';
 import { EnviarCorreoPassword } from './enviar-correo-password/enviar-correo-password';
 import { Ingredientes } from './ingredientes/ingredientes';
+import { PaginaPrincipalComponent } from './paginaPrincipal/pagina-principal';
 
 export const routes: Routes = [
 
@@ -11,5 +12,6 @@ export const routes: Routes = [
     {path : "singup", component: Signup},
     {path : "recuperarPassword/:token", component : RecuperarPassword},
     {path : "enviarCorreoPassword", component : EnviarCorreoPassword},
+    { path: '', redirectTo: 'paginaPrincipal', pathMatch: 'full' },
     {path : "ingredientes", component : Ingredientes} 
 ];
