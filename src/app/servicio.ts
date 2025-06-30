@@ -8,11 +8,10 @@ import axios from 'axios';
 export class Servicio {
   constructor() {}
 
-
-
+  url : string = "URLPLACEHOLDER"
 
   async agregarIngrediente(nombre: string, calorias: number, proteinas: number, grasas: number, carbohidratos: number) {
-    axios.post('http://localhost:3000/ingrediente', {
+    axios.post(`${this.url}/ingrediente`, {
         nombre: nombre,
         calorias: calorias,
         proteinas: proteinas,
@@ -27,7 +26,7 @@ export class Servicio {
 
   async eliminarIngrediente(id: string) {
     try {
-      const response = await axios.delete(`http://localhost:3000/ingrediente/${id}`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+      const response = await axios.delete(`${this.url}/ingrediente/${id}`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       return response.data;
     } catch (error) {
       console.error('Error al eliminar el ingrediente:', error);
@@ -37,7 +36,7 @@ export class Servicio {
   async modIngrediente(id:string, value: any, nombreValue : string){
 
     try{
-      const resp = await axios.put('http://localhost:3000/ingrediente',{
+      const resp = await axios.put(`${this.url}/ingrediente`,{
         id : id,
         nombreValue : value
       }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
@@ -50,7 +49,7 @@ export class Servicio {
 
   async getIngredientes(pagina : number, busqueda : string) {
     try {
-      const response = await axios.get('http://localhost:3000/ingrediente/' + pagina + "/" + busqueda, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+      const response = await axios.get(`${this.url}/ingrediente/` + pagina + "/" + busqueda, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       return response.data;
     } catch (error) {
       console.error('Error al obtener los ingredientes:', error);
@@ -61,7 +60,7 @@ export class Servicio {
   async cambiarPassword(token: string, password: string){
 
     try {
-      const response = await axios.post('http://localhost:3000/recuperarPassword/Cambiar', {token: token, password: password});
+      const response = await axios.post(`${this.url}/recuperarPassword/Cambiar`, {token: token, password: password});
       return response.data;
     } catch (error) {
       console.error('Error al cambiar la contraseña:', error);
@@ -74,7 +73,7 @@ export class Servicio {
   async crearUsuario(nombre: string, password: string, mail: string) {
 
     try {
-      const response = await axios.post('http://localhost:3000/signup', {nombre: nombre, password: password, mail: mail});
+      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail});
       console.log(response.data)
       
       localStorage.setItem("jwt", response.data)
@@ -95,7 +94,7 @@ export class Servicio {
     try {
       console.log('Intentando iniciar sesión con:', {nombre, password});
 
-      const response = await axios.post('http://localhost:3000/login', {nombre: nombre, password: password});
+      const response = await axios.post(`${this.url}/login`, {nombre: nombre, password: password});
 
       localStorage.setItem("jwt", response.data)
       console.log(localStorage.getItem("jwt"));
@@ -121,7 +120,7 @@ export class Servicio {
   async verificarToken(){
 
     if(localStorage.getItem("jwt")){
-      return axios.get("http://localhost:3000/checkLogIn", {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+      return axios.get(`${this.url}/checkLogIn`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
     }
     else{
       return false
