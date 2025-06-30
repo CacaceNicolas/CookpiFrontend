@@ -4,7 +4,11 @@ import { Signup } from './signup/signup';
 import { RecuperarPassword } from './recuperar-password/recuperar-password';
 import { EnviarCorreoPassword } from './enviar-correo-password/enviar-correo-password';
 import { Ingredientes } from './ingredientes/ingredientes';
+
+import { AuthGuard } from './auth-guard';
+=======
 import { PaginaPrincipalComponent } from './paginaPrincipal/pagina-principal';
+
 
 export const routes: Routes = [
 
@@ -12,6 +16,8 @@ export const routes: Routes = [
     {path : "singup", component: Signup},
     {path : "recuperarPassword/:token", component : RecuperarPassword},
     {path : "enviarCorreoPassword", component : EnviarCorreoPassword},
-    { path: '', redirectTo: 'paginaPrincipal', pathMatch: 'full' },
-    {path : "ingredientes", component : Ingredientes} 
+
+    {path : "ingredientes", component : Ingredientes, canActivate: [AuthGuard]} 
+=======
+    
 ];

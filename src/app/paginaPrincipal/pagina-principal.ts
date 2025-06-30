@@ -19,8 +19,7 @@ export class PaginaPrincipalComponent {
   async ngOnInit() {
     try {
 
-      const data = await this.servicio.getIngredientes();
-      this.recetas = Array.isArray(data) ? data : [data]; 
+
 
       if (this.recetas.length > 0) {
         this.recetaDestacada = this.recetas[Math.floor(Math.random() * this.recetas.length)];
