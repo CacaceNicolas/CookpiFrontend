@@ -9,7 +9,7 @@ import { PaginaPrincipalComponent } from './paginaPrincipal/pagina-principal';
 
 export const routes: Routes = [
   { path : "", component: PaginaPrincipalComponent }, 
-  { path : "login", component: Logni}, 
+  { path : "login", component: Login}, 
   { path : "signup", component: Signup},
   { path : "recuperarPassword/:token", component : RecuperarPassword},
   { path : "enviarCorreoPassword", component : EnviarCorreoPassword},
