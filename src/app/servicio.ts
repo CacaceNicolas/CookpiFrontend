@@ -8,7 +8,7 @@ import axios from 'axios';
 export class Servicio {
   constructor() {}
 
-  url : string = "URLPLACEHOLDER"
+  url : string = "http://localhost:3000"
 
   async agregarIngrediente(nombre: string, calorias: number, proteinas: number, grasas: number, carbohidratos: number) {
     axios.post(`${this.url}/ingrediente`, {
@@ -18,9 +18,7 @@ export class Servicio {
         grasas: grasas,
         carbohidratos: carbohidratos,
         token : localStorage.getItem("jwt")
-      });
-    
-
+    });
   }
 
 
@@ -33,12 +31,18 @@ export class Servicio {
       throw error;
     }
   }
-  async modIngrediente(id:string, value: any, nombreValue : string){
+  async modIngrediente(id:string, nombre: string, calorias: number, proteinas: number, grasas: number, carbohidratos: number){
 
     try{
       const resp = await axios.put(`${this.url}/ingrediente`,{
-        id : id,
-        nombreValue : value
+        id:id,
+        nombre: nombre,
+        calorias: calorias,
+        proteinas: proteinas,
+        grasas: grasas,
+        carbohidratos: carbohidratos,
+        token : localStorage.getItem("jwt")
+      
       }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
 
     }catch(error){
