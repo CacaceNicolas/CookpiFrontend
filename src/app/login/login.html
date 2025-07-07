@@ -1,33 +1,44 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SignIn</title>
   <link rel="stylesheet" href="login.css" />
 </head>
+
 <body>
   <header>
 
   </header>
 
+  <div *ngIf="mostrarNotificacion" class="notification" [ngClass]="{ 'error': tipoNotificacion === 'error' }">
+    {{ mensajeNotificacion }}
+  </div>
+
   <main>
+
     <h1>Iniciar sesión</h1>
+
     <form>
+
       <label for="usuario">Nombre de Usuario o email</label>
       <input [formControl] = "nombre" type="text" id="usuario" />
 
       <label for="password">Pasword</label>
       <input [formControl] = "password" type="password" id="password" />
 
-
     </form>
 
     <button (click) = "botonIniciarSesion()">Iniciar sesión</button>
 
     <a href="http://localhost:4200/singup">Creá tu cuenta</a>
+
     <p></p>
+
     <a href="http://localhost:4200/enviarCorreoPassword">Olvidaste tu contraseña?</a>
+
   </main>
 
   <footer>
@@ -39,7 +50,11 @@
   </footer>
 
   <div class="copyright">
+
     Copyright © 2025 Nacom, Inc. Todos los derechos reservados.
+
   </div>
+
 </body>
+
 </html>

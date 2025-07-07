@@ -14,6 +14,9 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 export class Ingredientes {
 
+  mensajeNotificacion: string = '';
+  mostrarNotificacion: boolean = false;
+
   nombre = new FormControl('');
   calorias = new FormControl(0);
   proteinas = new FormControl(0);
@@ -39,6 +42,15 @@ export class Ingredientes {
     this.actualizarLista()
   }
   
+  mostrarMensaje(mensaje: string) {
+    this.mensajeNotificacion = mensaje;
+    this.mostrarNotificacion = true;
+    setTimeout(() => {
+      this.mostrarNotificacion = false;
+      this.mensajeNotificacion = '';
+    }, 3000);
+  }
+
   async restarPagina(){
     if (this.pagina > 0){
       this.pagina -= 1
@@ -63,6 +75,7 @@ export class Ingredientes {
     if (this.items.length == 0 && this.pagina > 0){
       this.items = itemsAnterior
       this.pagina -= 1
+     
     }
 
 
@@ -72,6 +85,9 @@ export class Ingredientes {
   async eliminarItem(id: string) {
     this.apiservice.eliminarIngrediente(id)
     this.actualizarLista()
+    
+
+
   }
 
   async modBtn(id : number){

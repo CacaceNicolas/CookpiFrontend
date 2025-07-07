@@ -89,7 +89,6 @@ export class Servicio {
       console.error('Error al crear al usuario:', error);
       throw error;
     }
-
   }
 
 
@@ -107,7 +106,7 @@ export class Servicio {
     } catch (error) {
       console.error('Error al iniciar sesion:', error);
       throw error;
-    }
+    } 
 
   }
 
