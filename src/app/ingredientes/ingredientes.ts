@@ -105,6 +105,21 @@ export class Ingredientes {
     this.carbohidratosMod.setValue(itemMod.carbohidratos)
   }
 
+
+  async borrarFormulario(){
+
+    this.nombre.setValue("")
+    this.calorias.setValue(0)
+    this.grasas.setValue(0)
+    this.carbohidratos.setValue(0)
+    this.proteinas.setValue(0)
+    
+
+
+  }
+
+
+
   async modificarIngrediente(){
 
     if (this.nombreMod.value && this.caloriasMod.value && this.proteinasMod.value && this.grasasMod.value && this.carbohidratosMod.value) {
@@ -144,6 +159,7 @@ export class Ingredientes {
           this.carbohidratos.value
         );
         await this.actualizarLista();
+        await this.borrarFormulario();
       } catch (error) {
         console.error('Error al crear el ingrediente:', error);
       }
