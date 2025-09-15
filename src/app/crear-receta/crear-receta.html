@@ -1,0 +1,25 @@
+<p>crear-receta works!</p>
+
+        <label>Nombre</label>
+        <input [formControl] = "nombre">
+
+        <label>Ingrediente</label>  
+
+
+        <table border="1">
+  <thead>
+    <tr>
+      <th>Nombre</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let i of counter(cantIngredientes)">
+              <select id="comida" name="comida">
+            <option *ngFor="let item of items">{{ item.nombre }}</option>
+        </select>
+    </tr>
+    <button (click)="incrementarIngredientes()">Agregar ingrediente</button>
+    <button (click)="reducirIngredientes()">Quitar ingrediente</button>
+  </tbody>
+</table>

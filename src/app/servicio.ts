@@ -61,6 +61,16 @@ export class Servicio {
     }
   }
 
+  async getIngredientesTodos(){
+    try {
+      const response = await axios.get(`${this.url}/ingrediente/`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener los ingredientes:', error);
+      throw error;
+    }
+  }
+
   async cambiarPassword(token: string, password: string){
 
     try {

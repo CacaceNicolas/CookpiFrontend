@@ -65,8 +65,6 @@ export class Ingredientes {
       this.pagina -= 1
     }
 
-
-
   }
 
   async eliminarItem(id: string) {
