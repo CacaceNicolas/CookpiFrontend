@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Servicio } from '../servicio';
 
 @Component({
   selector: 'app-crear-receta',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './crear-receta.html',
   styleUrl: './crear-receta.css'
 })
@@ -15,8 +15,14 @@ export class CrearReceta {
   descripcion = new FormControl("");
   procedimiento = new FormControl("")
 
+  cantIngredientes : number = 2
+  ingredientesSeleccionados: string[] = Array(this.cantIngredientes).fill('');
+
+
 
   constructor(private apiservice: Servicio) {}
+
+
 
   items : any [] = []
 
@@ -29,7 +35,7 @@ export class CrearReceta {
     this.items = await this.apiservice.getIngredientesTodos();
   }
 
-  cantIngredientes : number = 2;
+
 
   counter(length: number): number[] {
     return Array.from({ length }, (_, i) => i);
@@ -37,14 +43,28 @@ export class CrearReceta {
 
   incrementarIngredientes(): void {
   this.cantIngredientes++;
-  }
+  this.ingredientesSeleccionados.push('');
+}
 
-  
-  reducirIngredientes(): void {
-  if (this.cantIngredientes > 1){
+reducirIngredientes(): void {
+  if (this.cantIngredientes > 1) {
     this.cantIngredientes--;
+    this.ingredientesSeleccionados.pop();
   }
-  }
+}
 
+mostrarIngredientes(): void{
+
+  if(this.nombre.value != null && this.descripcion.value != null && this.procedimiento.value != null && this.ingredientesSeleccionados != null && this.ingredientesSeleccionados[0] != ""){
+
+  this.apiservice.agregarReceta(
+    this.nombre.value,
+    this.descripcion.value,
+    this.procedimiento.value,
+    this.ingredientesSeleccionados
+  
+  )
+}
+}
 
 }

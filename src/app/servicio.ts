@@ -20,7 +20,16 @@ export class Servicio {
         token : localStorage.getItem("jwt")
     });
   }
-
+    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, ingredientes:string[]) {
+    axios.post(`${this.url}/receta`, {
+        nombre: nombre,
+        descripcion : descripcion,
+        procedimiento : procedimiento,
+        ingredientes : ingredientes,
+        token : localStorage.getItem("jwt")
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
+  
 
   async eliminarIngrediente(id: string) {
     try {

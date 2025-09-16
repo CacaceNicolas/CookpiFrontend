@@ -2,6 +2,10 @@
 
         <label>Nombre</label>
         <input [formControl] = "nombre">
+        <label>Descripcion</label>
+        <input [formControl] = "descripcion">
+        <label>Procedimiento</label>
+        <textarea [formControl] = "procedimiento"></textarea>
 
         <label>Ingrediente</label>  
 
@@ -14,12 +18,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let i of counter(cantIngredientes)">
-              <select id="comida" name="comida">
-            <option *ngFor="let item of items">{{ item.nombre }}</option>
+    <tr *ngFor="let i of counter(cantIngredientes); let idx = index">
+              <select [(ngModel)]="ingredientesSeleccionados[idx] "  id="comida" name="comida">
+            <option *ngFor="let item of items" [value]="item.codigo">{{ item.nombre }}</option>
         </select>
     </tr>
     <button (click)="incrementarIngredientes()">Agregar ingrediente</button>
     <button (click)="reducirIngredientes()">Quitar ingrediente</button>
+    <button (click)="mostrarIngredientes()">Mostrar ingredientes</button>
   </tbody>
 </table>
