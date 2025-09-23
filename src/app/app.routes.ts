@@ -7,6 +7,7 @@ import { Ingredientes } from './ingredientes/ingredientes';
 import { AuthGuard } from './auth-guard';
 import { PaginaPrincipalComponent } from './paginaPrincipal/pagina-principal'; 
 import { CrearReceta } from './crear-receta/crear-receta';
+import { CrearLibro } from './crear-libro/crear-libro';
 
 export const routes: Routes = [
   { path : "", component: PaginaPrincipalComponent }, 
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path : "recuperarPassword/:token", component : RecuperarPassword},
   { path : "enviarCorreoPassword", component : EnviarCorreoPassword},
   { path : "crearReceta", component : CrearReceta},
+  { path : "crea", component : CrearLibro},
   { path : "ingredientes", component : Ingredientes, canActivate: [AuthGuard]},
 ];

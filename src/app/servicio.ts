@@ -20,14 +20,26 @@ export class Servicio {
         token : localStorage.getItem("jwt")
     });
   }
-    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, ingredientes:string[]) {
+    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
     axios.post(`${this.url}/receta`, {
         nombre: nombre,
         descripcion : descripcion,
+        momentoDelDia: momentoDelDia,
         procedimiento : procedimiento,
         ingredientes : ingredientes,
         token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
+
+  async agregarLibro(nombre : string, descripcion : string){
+    axios.post(`${this.url}/libro`, {
+        nombre: nombre,
+        descripcion : descripcion,
+        token : localStorage.getItem("jwt")
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+
+
+
   }
   
 

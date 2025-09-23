@@ -19,9 +19,19 @@
   </thead>
   <tbody>
     <tr *ngFor="let i of counter(cantIngredientes); let idx = index">
-              <select [(ngModel)]="ingredientesSeleccionados[idx] "  id="comida" name="comida">
+          <select [(ngModel)]="ingredientesSeleccionados[idx].codigo"  id="comida" name="comida">
             <option *ngFor="let item of items" [value]="item.codigo">{{ item.nombre }}</option>
-        </select>
+          </select>
+
+          <input type="number" [(ngModel)]="ingredientesSeleccionados[idx].cantidad"  min ="1">
+    </tr>
+    <tr>
+      <select [formControl] = "momentoDelDia" name="MomentoDelDia" id="">
+        <option value="Desayuno/Merienda">Desayuno/Merienda</option>
+        <option value="Almuerzo/Cena">Almuerzo/Cena</option>
+        <option value="Postre">Postre</option>
+        <option value="Snack">Snack</option>
+      </select>
     </tr>
     <button (click)="incrementarIngredientes()">Agregar ingrediente</button>
     <button (click)="reducirIngredientes()">Quitar ingrediente</button>

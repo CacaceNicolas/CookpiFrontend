@@ -13,15 +13,17 @@ export class CrearReceta {
 
   nombre = new FormControl("");
   descripcion = new FormControl("");
-  procedimiento = new FormControl("")
+  procedimiento = new FormControl("");
+  momentoDelDia = new FormControl("");
 
   cantIngredientes : number = 2
-  ingredientesSeleccionados: string[] = Array(this.cantIngredientes).fill('');
-
+  ingredientesSeleccionados: { codigo: string, cantidad: number }[] = Array(this.cantIngredientes).fill(null).map(() => ({
+  codigo: '',
+  cantidad: 0
+}));
 
 
   constructor(private apiservice: Servicio) {}
-
 
 
   items : any [] = []
@@ -30,9 +32,10 @@ export class CrearReceta {
     this.actualizarLista()
     }
 
-    async actualizarLista() {
+  async actualizarLista() {
     const itemsAnterior = this.items;
     this.items = await this.apiservice.getIngredientesTodos();
+    
   }
 
 
@@ -43,7 +46,7 @@ export class CrearReceta {
 
   incrementarIngredientes(): void {
   this.cantIngredientes++;
-  this.ingredientesSeleccionados.push('');
+  this.ingredientesSeleccionados.push({codigo:"", cantidad: 0});
 }
 
 reducirIngredientes(): void {
@@ -55,12 +58,15 @@ reducirIngredientes(): void {
 
 mostrarIngredientes(): void{
 
-  if(this.nombre.value != null && this.descripcion.value != null && this.procedimiento.value != null && this.ingredientesSeleccionados != null && this.ingredientesSeleccionados[0] != ""){
+  if(this.momentoDelDia.value != null &&this.nombre.value != null && this.descripcion.value != null && this.procedimiento.value != null && this.ingredientesSeleccionados != null && this.ingredientesSeleccionados[0].codigo != ""){
+
+    console.log(this.ingredientesSeleccionados)
 
   this.apiservice.agregarReceta(
     this.nombre.value,
     this.descripcion.value,
     this.procedimiento.value,
+    this.momentoDelDia.value,
     this.ingredientesSeleccionados
   
   )
