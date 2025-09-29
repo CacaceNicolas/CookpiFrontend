@@ -37,11 +37,11 @@ export class Servicio {
         descripcion : descripcion,
         token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
-
-
-
   }
   
+  async obtenerReceta(id: string){
+    return axios.get(`${this.url}/receta/` + id);
+  }
 
   async eliminarIngrediente(id: string) {
     try {
@@ -162,5 +162,11 @@ export class Servicio {
     }
   }
 
+  async obtenerLibros(){
+
+    return await axios.get(`${this.url}/libro/`)
+
+
+  }
 
 }
