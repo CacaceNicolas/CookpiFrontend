@@ -1,13 +1,8 @@
 <h1>{{nombre}}</h1>
 
-<h2>
-   {{descripcion}} 
-</h2>
+<h2>{{descripcion}}</h2>
 
 <p>{{procedimiento}}</p>
 
-<button>Agregar a libro</button>
+<button (click)="obtenerLibros()">Agregar a libro</button>
 
-<select>
-        <option *ngFor="let libro of libros" [value]="libro.nombre">{{ item.nombre }}</option>
-</select>

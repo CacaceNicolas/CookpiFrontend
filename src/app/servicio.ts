@@ -162,11 +162,17 @@ export class Servicio {
     }
   }
 
-  async obtenerLibros(){
+  async obtenerLibros(mailUs : string){
 
-    return await axios.get(`${this.url}/libro/`)
-
+    return await axios.get(`${this.url}/libro/` + mailUs)
 
   }
+
+
+  async obtenerMail(){
+    return await axios.get(`${this.url}/login/mail`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  }
+  
+
 
 }
