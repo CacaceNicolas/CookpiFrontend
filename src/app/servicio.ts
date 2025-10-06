@@ -163,7 +163,7 @@ export class Servicio {
   }
 
   async obtenerLibros(mailUs : string){
-
+    
     return await axios.get(`${this.url}/libro/` + mailUs)
 
   }
@@ -173,6 +173,22 @@ export class Servicio {
     return await axios.get(`${this.url}/login/mail`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
   }
   
+  async agregarRecetaALibro(idLibro : string, idReceta : string){
+        axios.post(`${this.url}/libro/agregarReceta`,{
+        libroId : idLibro,
+        recetaId : idReceta,
+        token : localStorage.getItem("jwt")
+    });
 
+
+
+  }
+
+
+  async obtenerRecetasPorLibro(){
+
+    return await axios.get(`${this.url}/libro/`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+
+  }
 
 }

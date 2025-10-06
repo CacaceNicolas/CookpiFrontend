@@ -23,12 +23,9 @@ export class CrearLibro {
   mostrarLibros(): void{
 
   if (this.nombre.value != null && this.descripcion.value !=null){
-
-
-  this.apiservice.agregarLibro(
+    this.apiservice.agregarLibro(
     this.nombre.value,
     this.descripcion.value
-  
   )
 }
 }

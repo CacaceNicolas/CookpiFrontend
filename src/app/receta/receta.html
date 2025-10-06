@@ -4,5 +4,8 @@
 
 <p>{{procedimiento}}</p>
 
-<button (click)="obtenerLibros()">Agregar a libro</button>
+<button (click)="agregarALibro()">Agregar a libro</button>
 
+<select [(ngModel)]="libroSeleccionado" name="" id="">
+    <option  [value]="item.id" *ngFor="let item of libros">{{item.nombre}}</option>
+</select>
