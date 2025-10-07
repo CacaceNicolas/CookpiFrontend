@@ -6,13 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 @Component({
   selector: 'app-receta',
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './receta.html',
   styleUrl: './receta.css'
 })
+
 export class Receta {
   idReceta: string = "";
   procedimiento: string = "";
@@ -25,9 +25,6 @@ export class Receta {
   constructor(private apiservice: Servicio, private route: ActivatedRoute) {}
 
   async ngOnInit() {
-
-  
-
     try {
       this.idReceta = this.route.snapshot.paramMap.get('id') || '';
       const resp = await this.apiservice.obtenerReceta(this.idReceta);

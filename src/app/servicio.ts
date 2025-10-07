@@ -108,14 +108,14 @@ export class Servicio {
   async crearUsuario(nombre: string, password: string, mail: string) {
 
     try {
+
       const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail});
       console.log(response.data)
       
       localStorage.setItem("jwt", response.data)
 
-    
-
       return response.data;
+
     } catch (error) {
       console.error('Error al crear al usuario:', error);
       throw error;
@@ -127,17 +127,22 @@ export class Servicio {
   async iniciarSesion(nombre: string, password: string) {
 
     try {
+
       console.log('Intentando iniciar sesión con:', {nombre, password});
 
       const response = await axios.post(`${this.url}/login`, {nombre: nombre, password: password});
 
       localStorage.setItem("jwt", response.data)
+
       console.log(localStorage.getItem("jwt"));
 
       return response.data;
+      
     } catch (error) {
+
       console.error('Error al iniciar sesion:', error);
       throw error;
+
     }
 
   }
@@ -164,7 +169,7 @@ export class Servicio {
 
   async obtenerLibros(mailUs : string){
     
-    return await axios.get(`${this.url}/libro/` + mailUs)
+    return await axios.get(`${this.url}/libro/pormail/` + mailUs)
 
   }
 
@@ -179,16 +184,21 @@ export class Servicio {
         recetaId : idReceta,
         token : localStorage.getItem("jwt")
     });
+  }
 
+
+  async obtenerRecetasPorLibro(idLibro : string){
+
+    return await axios.get(`${this.url}/libro/recetas/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  
+  }
+
+  async obtenerLibroPorId(idLibro : string){
+
+    return await axios.get(`${this.url}/libro/porid/` + idLibro)
 
 
   }
 
-
-  async obtenerRecetasPorLibro(){
-
-    return await axios.get(`${this.url}/libro/`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
-
-  }
 
 }
