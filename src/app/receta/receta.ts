@@ -54,9 +54,10 @@ export class Receta {
     } catch (error) {
       console.error("Error al obtener los libros:", error);
     }
-  }
+  } 
 
   async agregarALibro(){  
+
     this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
     
   }

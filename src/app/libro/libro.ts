@@ -34,6 +34,7 @@ async ngOnInit(){
 async obtenerRecetas(){
   
   const respReceta = (await this.apiservice.obtenerRecetasPorLibro(this.idLibro)).data;
+  console.log(respReceta)
   for (let i = 0; i < respReceta.length; i++) {
   
   this.recetas.push(respReceta[i])

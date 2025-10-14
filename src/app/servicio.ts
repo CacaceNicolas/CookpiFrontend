@@ -105,11 +105,11 @@ export class Servicio {
   }
 
 
-  async crearUsuario(nombre: string, password: string, mail: string) {
+  async crearUsuario(nombre: string, password: string, mail: string,altura : number, peso: number, objetivo: number, edad : number, genero: number) {
 
     try {
 
-      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail});
+      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail, altura: altura, peso:peso, objetivo: objetivo, edad: edad, genero:genero});
       console.log(response.data)
       
       localStorage.setItem("jwt", response.data)
@@ -190,7 +190,7 @@ export class Servicio {
   async obtenerRecetasPorLibro(idLibro : string){
 
     return await axios.get(`${this.url}/libro/recetas/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
-  
+    
   }
 
   async obtenerLibroPorId(idLibro : string){
@@ -200,5 +200,12 @@ export class Servicio {
 
   }
 
+
+  async agregarConsumo(idReceta : number, mail : string){
+
+    return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
+
+
+  }
 
 }
