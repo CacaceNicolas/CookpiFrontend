@@ -20,7 +20,28 @@ export class Servicio {
         token : localStorage.getItem("jwt")
     });
   }
+    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
+    axios.post(`${this.url}/receta`, {
+        nombre: nombre,
+        descripcion : descripcion,
+        momentoDelDia: momentoDelDia,
+        procedimiento : procedimiento,
+        ingredientes : ingredientes,
+        token : localStorage.getItem("jwt")
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
 
+  async agregarLibro(nombre : string, descripcion : string){
+    axios.post(`${this.url}/libro`, {
+        nombre: nombre,
+        descripcion : descripcion,
+        token : localStorage.getItem("jwt")
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
+  
+  async obtenerReceta(id: string){
+    return axios.get(`${this.url}/receta/` + id);
+  }
 
   async eliminarIngrediente(id: string) {
     try {
@@ -61,6 +82,16 @@ export class Servicio {
     }
   }
 
+  async getIngredientesTodos(){
+    try {
+      const response = await axios.get(`${this.url}/ingrediente/`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+      return response.data;
+    } catch (error) {
+      console.error('Error al obtener los ingredientes:', error);
+      throw error;
+    }
+  }
+
   async cambiarPassword(token: string, password: string){
 
     try {
@@ -74,17 +105,17 @@ export class Servicio {
   }
 
 
-  async crearUsuario(nombre: string, password: string, mail: string) {
+  async crearUsuario(nombre: string, password: string, mail: string,altura : number, peso: number, objetivo: number, edad : number, genero: number) {
 
     try {
-      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail});
+
+      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail, altura: altura, peso:peso, objetivo: objetivo, edad: edad, genero:genero});
       console.log(response.data)
       
       localStorage.setItem("jwt", response.data)
 
-    
-
       return response.data;
+
     } catch (error) {
       console.error('Error al crear al usuario:', error);
       throw error;
@@ -96,17 +127,22 @@ export class Servicio {
   async iniciarSesion(nombre: string, password: string) {
 
     try {
+
       console.log('Intentando iniciar sesión con:', {nombre, password});
 
       const response = await axios.post(`${this.url}/login`, {nombre: nombre, password: password});
 
       localStorage.setItem("jwt", response.data)
+
       console.log(localStorage.getItem("jwt"));
 
       return response.data;
+      
     } catch (error) {
+
       console.error('Error al iniciar sesion:', error);
       throw error;
+
     }
 
   }
@@ -131,5 +167,45 @@ export class Servicio {
     }
   }
 
+  async obtenerLibros(mailUs : string){
+    
+    return await axios.get(`${this.url}/libro/pormail/` + mailUs)
+
+  }
+
+
+  async obtenerMail(){
+    return await axios.get(`${this.url}/login/mail`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  }
+  
+  async agregarRecetaALibro(idLibro : string, idReceta : string){
+        axios.post(`${this.url}/libro/agregarReceta`,{
+        libroId : idLibro,
+        recetaId : idReceta,
+        token : localStorage.getItem("jwt")
+    });
+  }
+
+
+  async obtenerRecetasPorLibro(idLibro : string){
+
+    return await axios.get(`${this.url}/libro/recetas/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+    
+  }
+
+  async obtenerLibroPorId(idLibro : string){
+
+    return await axios.get(`${this.url}/libro/porid/` + idLibro)
+
+
+  }
+
+
+  async agregarConsumo(idReceta : number, mail : string){
+
+    return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
+
+
+  }
 
 }

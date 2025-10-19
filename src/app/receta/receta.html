@@ -1,0 +1,11 @@
+<h1>{{nombre}}</h1>
+
+<h2>{{descripcion}}</h2>
+
+<p>{{procedimiento}}</p>
+
+<button (click)="agregarALibro()">Agregar a libro</button>
+
+<select [(ngModel)]="libroSeleccionado" name="" id="">
+    <option  [value]="item.id" *ngFor="let item of libros">{{item.nombre}}</option>
+</select>

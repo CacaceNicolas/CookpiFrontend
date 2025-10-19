@@ -1,0 +1,44 @@
+<div class="crear-receta-container">
+  <div class="imagen-receta"></div>
+
+  <div class="campo-horizontal">
+    <label for="nombre">NOMBRE RECETA:</label>
+    <input type="text" id="nombre" [formControl]="nombre" />
+  </div>
+
+  <div class="campo-horizontal momento-dia">
+    <label for="momento">Momento del día:</label>
+    <select [formControl]="momentoDelDia">
+      <option value="Desayuno/Merienda">Desayuno/Merienda</option>
+      <option value="Almuerzo/Cena">Almuerzo/Cena</option>
+      <option value="Postre">Postre</option>
+      <option value="Snack">Snack</option>
+    </select>
+  </div>
+
+  <div class="ingredientes-container">
+    <h3>INGREDIENTES</h3>
+    <div *ngFor="let i of counter(cantIngredientes); let idx = index" class="fila-ingrediente">
+      <select [(ngModel)]="ingredientesSeleccionados[idx].codigo">
+        <option *ngFor="let item of items" [value]="item.codigo">{{ item.nombre }}</option>
+      </select>
+      <input type="number" [(ngModel)]="ingredientesSeleccionados[idx].cantidad" min="1" placeholder="Cantidad en gr" />
+    </div>
+
+    <div class="botones-ingredientes">
+      <button (click)="incrementarIngredientes()">Agregar ingrediente</button>
+      <button (click)="reducirIngredientes()">Quitar ingrediente</button>
+      <button (click)="mostrarIngredientes()">Mostrar ingredientes</button>
+    </div>
+  </div>
+
+  <div class="campo-vertical">
+    <label for="descripcion">Descripcion:</label>
+    <textarea id="descripcion" [formControl]="descripcion"></textarea>
+  </div>
+
+  <div class="campo-vertical">
+    <label for="procedimiento">Procedimiento:</label>
+    <textarea id="procedimiento" [formControl]="procedimiento"></textarea>
+  </div>
+</div>
