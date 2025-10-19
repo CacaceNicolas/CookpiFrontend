@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="ingredientes.css" />
 </head>   
+
+<input type="search" #busquedaInput placeholder="Buscar ingrediente..." (keydown.enter)="buscar(busquedaInput.value)">
+
 <table border="1">
   <thead>
     <tr>
@@ -24,12 +27,36 @@
       <td>{{ item.carbohidratos }}</td>
       <td>
         <button (click)="eliminarItem(item.id)">Eliminar</button>
+        <button (click)="modBtn(item.id)">Modificar</button>
       </td>
     </tr>
+
+  <div *ngIf="modificacion">
+
+    <label>Nombre</label>
+      <input [formControl] = "nombreMod">
+
+      <label>Calorias</label>
+      <input [formControl] = "caloriasMod">
+
+      <label>Proteinas</label>
+      <input [formControl] = "proteinasMod">
+
+      <label>Carbohidratos</label>
+      <input [formControl] = "carbohidratosMod">
+    
+      <label>Grasas</label>
+      <input [formControl] = "grasasMod">
+
+      <button (click)= "modificarIngrediente()">Modificar</button>
+
+  </div>
   </tbody>
 </table>
 
-    <button (click) = "actualizarLista()">aaa</button>
+    <button (click) = "sumarPagina()">mas</button>
+    <button (click) = "restarPagina()">menos</button>
+
 
       <label>Nombre</label>
       <input [formControl] = "nombre">
