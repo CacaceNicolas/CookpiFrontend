@@ -1,0 +1,149 @@
+:root {
+  font-size: 16px;
+}
+
+.receta-page {
+  background: #efefef;
+  padding: 1em;
+  max-width: 26em;
+  margin: auto;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Placeholder imagen */
+.imagen-placeholder {
+  width: 100%;
+  height: 12em;
+  background: #d4d4d4;
+  border-radius: 0.5em;
+  position: relative;
+  margin-bottom: 1em;
+}
+
+
+/* Nombre receta */
+.nombre-seccion {
+  margin-bottom: 1em;
+}
+.titulo {
+  font-size: 1em;
+  font-weight: bold;
+}
+.valor {
+  background: #ddd;
+  padding: 0.5em;
+  border-radius: 0.4em;
+}
+
+/* Info adicional */
+.info-extra {
+  font-size: 0.9em;
+  margin-bottom: 1.5em;
+}
+.chip {
+  background: #d0d0d0;
+  border: none;
+  border-radius: 1em;
+  padding: 0.3em 0.7em;
+  margin-left: 0.3em;
+}
+
+/* Ingredientes */
+.ingredientes {
+  background: #cfcfcf;
+  padding: 1em;
+  border-radius: 0.7em;
+  margin-bottom: 1.5em;
+}
+.ingredientes-header {
+  text-align: center;
+}
+.ovales {
+  display: flex;
+  justify-content: center;
+  gap: 0.4em;
+  margin-bottom: 0.5em;
+}
+.oval {
+  width: 1.4em;
+  height: 0.7em;
+  background: #eaeaea;
+  border-radius: 1em;
+}
+.lista-ingredientes {
+  list-style: none;
+  padding: 0;
+  margin-top: 0.5em;
+}
+.lista-ingredientes li {
+  background: #e6e6e6;
+  margin-bottom: 0.4em;
+  padding: 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+}
+
+/* Texto */
+.subtitulo {
+  margin-top: 1.2em;
+  font-weight: bold;
+}
+.texto {
+  background: #ddd;
+  border-radius: 0.5em;
+  padding: 0.8em;
+  min-height: 5em;
+}
+
+/* Agregar a libro */
+.acciones {
+  margin-top: 1.5em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+.selector-libro {
+  padding: 0.6em;
+  border-radius: 0.5em;
+  border: 1px solid #ccc;
+  font-size: 1em;
+}
+.btn-agregar {
+  background: #2f7a5e;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.7em;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 1.5em;
+  font-size: 0.8em;
+  color: #555;
+}
+
+/* 📱 Responsive */
+@media (min-width: 40em) {
+  .receta-page {
+    max-width: 35em;
+    padding: 2em;
+  }
+  .texto {
+    min-height: 6em;
+  }
+  .acciones {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .selector-libro {
+    width: 60%;
+  }
+  .btn-agregar {
+    width: 35%;
+  }
+}
