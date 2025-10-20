@@ -1,11 +1,65 @@
-<h1>{{nombre}}</h1>
+<div class="receta-page">
+  <!-- Placeholder imagen -->
+  <div class="imagen-placeholder">
+    <div class="cruz"></div>
+    <div class="cruz cruz2"></div>
+  </div>
 
-<h2>{{descripcion}}</h2>
+  <!-- Nombre -->
+  <div class="nombre-seccion">
+    <h2 class="titulo">NOMBRE RECETA:</h2>
+    <p class="valor">{{ nombre }}</p>
+  </div>
 
-<p>{{procedimiento}}</p>
+  <!-- Info extra -->
+  <div class="info-extra">
+     <!-- <p>Tiempo de producción: <span>{{ tiempoProduccion || '---' }}</span></p>
+    <p>Momento del día:</p>
+    <p class="texto">{{ momentoDelDia }}</p>-->
+    
+  </div>
 
-<button (click)="agregarALibro()">Agregar a libro</button>
+  <!-- Ingredientes
+  <div class="ingredientes">
+    <div class="ingredientes-header">
+      <div class="ovales">
+        <span *ngFor="let i of [1,2,3,4,5,6]" class="oval"></span>
+      </div>
+      <h3>INGREDIENTES</h3>
+    </div>
 
-<select [(ngModel)]="libroSeleccionado" name="" id="">
-    <option  [value]="item.id" *ngFor="let item of libros">{{item.nombre}}</option>
-</select>
+    <ul class="lista-ingredientes">
+      <li *ngFor="let ing of ingredientes">
+        {{ ing.cantidad }} {{ ing.unidad }} de {{ ing.nombre }}
+      </li>
+    </ul>
+  </div> -->
+
+  <!-- Descripción -->
+  <h3 class="subtitulo">Descripción:</h3>
+  <p class="texto">{{ descripcion }}</p>
+
+  <!-- Procedimiento -->
+  <h3 class="subtitulo">Procedimiento:</h3>
+  <p class="texto">{{ procedimiento }}</p>
+
+  <!-- Agregar a libro -->
+  <div class="acciones">
+    <select [(ngModel)]="libroSeleccionado" class="selector-libro">
+      <option value="">Seleccionar libro...</option>
+      <option *ngFor="let item of libros" [value]="item.id">
+        {{ item.nombre }}
+      </option>
+    </select>
+
+    <button class="btn-agregar" (click)="agregarALibro()">
+       Agregar a libro
+    </button>
+  </div>
+
+  <footer class="footer">
+    <a href="#">Volver atrás</a> |
+    <a href="#">Términos y Condiciones</a> |
+    <a href="#">Contacto</a>
+  </footer>
+</div>

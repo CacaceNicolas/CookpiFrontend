@@ -23,6 +23,6 @@ export const routes: Routes = [
   { path : "receta/:id", component : Receta},
   { path : "libro/:id", component : Libro},
   { path : "nutricion", component : Nutricion, canActivate: [AuthGuard]},
-  { path : "crearlibro", component : CrearLibro, canActivate: [AuthGuard]},
+  { path : "crearibro", component : CrearLibro, canActivate: [AuthGuard]},
   { path : "ingredientes", component : Ingredientes, canActivate: [AuthGuard]},
 ];
