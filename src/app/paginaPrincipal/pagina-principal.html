@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,12 +10,24 @@
 <body>
 
   <header class="top-bar">
-    <h1 class="logo">paginaPrincipal</h1>
-    <div class="icons">
-      <span class="icon">🔍</span>
-      <span class="icon">⚙️</span>
-    </div>
+    <h1 class="logo">paginaPrincipal</h1>    
+    <input type="search" #busquedaInput placeholder="Buscar receta..." (keydown.enter)="buscar(busquedaInput.value)">
+  
   </header>
+
+  <div *ngFor = "let item of recetas">
+
+    <p>{{item.nombre}}</p>
+    <button (click) = "verReceta(item.id)">Ver</button>
+
+  </div>
+
+  
+    <button (click) = "restarPagina()">menos</button>
+    <button (click) = "sumarPagina()">mas</button>
+
+
+
 
   <nav class="categories">
     <div class="category">CATEGORÍA 1</div>

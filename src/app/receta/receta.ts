@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Servicio } from '../servicio';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -61,4 +60,13 @@ export class Receta {
     this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
     
   }
+
+  async agregarConsumo(){
+
+    this.apiservice.agregarConsumo(+this.idReceta, this.mail)
+    
+
+
+  }
+
 }

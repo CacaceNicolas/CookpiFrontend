@@ -20,7 +20,17 @@ export class Servicio {
         token : localStorage.getItem("jwt")
     });
   }
-    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
+   
+  async obtenerRecetas(pagina : number, busqueda : string, buscar : boolean){
+    if (buscar){
+      return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda);     
+    }
+    else{
+      return await axios.get(`${this.url}/receta/pag/` + pagina);
+    }
+  }
+  
+  async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
     axios.post(`${this.url}/receta`, {
         nombre: nombre,
         descripcion : descripcion,
@@ -197,7 +207,6 @@ export class Servicio {
 
     return await axios.get(`${this.url}/libro/porid/` + idLibro)
 
-
   }
 
 
@@ -205,7 +214,9 @@ export class Servicio {
 
     return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
 
-
   }
 
+
+
+  
 }
