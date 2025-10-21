@@ -185,8 +185,17 @@ export class Servicio {
 
 
   async obtenerMail(){
+
     return await axios.get(`${this.url}/login/mail`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  
   }
+
+  async obtenerUsuario(mail: string){
+
+    return await axios.get(`${this.url}/usuario/` + mail, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  
+  }
+
   
   async agregarRecetaALibro(idLibro : string, idReceta : string){
         axios.post(`${this.url}/libro/agregarReceta`,{
@@ -209,6 +218,10 @@ export class Servicio {
 
   }
 
+  async obtenerConsumoUsuario(mail: string){
+    return await axios.get(`${this.url}/consumo/` + mail)
+  }
+
 
   async agregarConsumo(idReceta : number, mail : string){
 
@@ -216,7 +229,12 @@ export class Servicio {
 
   }
 
+  async like( idReceta : number, mail : string){
 
+    return await axios.post(`${this.url}/usuario/like`, {idReceta: idReceta, mail: mail})
+
+
+  }
 
   
 }

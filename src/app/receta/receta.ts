@@ -39,7 +39,7 @@ export class Receta {
     }
 
 
-      try {
+    try {
       const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
       console.log(resp);
       console.log("Longitud: " + resp.length)
@@ -68,5 +68,14 @@ export class Receta {
 
 
   }
+
+
+  async like(){
+    this.apiservice.like(+this.idReceta, this.mail);
+
+
+
+  }
+
 
 }
