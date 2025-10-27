@@ -21,22 +21,36 @@ export class Servicio {
     });
   }
    
-  async obtenerRecetas(pagina : number, busqueda : string, buscar : boolean){
+  async obtenerRecetas(pagina : number, busqueda : string, buscar : boolean, filtro : string){
     if (buscar){
-      return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda);     
+      if(filtro == ""){
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda);
+      }
+      else{
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda + `/` + filtro);
+      }
     }
     else{
-      return await axios.get(`${this.url}/receta/pag/` + pagina);
+      if (filtro == ""){
+        return await axios.get(`${this.url}/receta/pag/` + pagina);
+      }
+      else{
+        return await axios.get(`${this.url}/receta/pagf/` + pagina + `/` + filtro); 
+      }
     }
   }
   
-  async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
+  async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[], tiempo : number, dieta : string) {
     axios.post(`${this.url}/receta`, {
         nombre: nombre,
         descripcion : descripcion,
         momentoDelDia: momentoDelDia,
         procedimiento : procedimiento,
         ingredientes : ingredientes,
+        cantLikes : 0,
+        tiempo : tiempo,
+        dieta : dieta,
+
         token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
@@ -231,10 +245,16 @@ export class Servicio {
 
   async like( idReceta : number, mail : string){
 
-    return await axios.post(`${this.url}/usuario/like`, {idReceta: idReceta, mail: mail})
+    return await axios.post(`${this.url}/usuario/like`, {recetaId: idReceta, mail: mail}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
 
 
   }
 
-  
+  async yaLikeada( idReceta : number, mail : string){
+
+    return await axios.get(`${this.url}/usuario/like/` + mail + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+
+  }
+
+
 }

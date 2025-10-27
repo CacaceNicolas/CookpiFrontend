@@ -19,6 +19,7 @@ export class PaginaPrincipalComponent {
   recetaDestacada: any;
   pagina = 0;
   busqueda = "";
+  filtro : string = "";
 
   constructor(private servicio: Servicio, @Inject(Router) private router : Router) {}
 
@@ -34,10 +35,10 @@ export class PaginaPrincipalComponent {
 
       const itemsAnterior = this.recetas;
       if(this.busqueda == ""){
-      this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,false)).data;
+      this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,false, this.filtro)).data;
       }
       else{
-        this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,true)).data;
+        this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,true, this.filtro)).data;
       }
   
       if (this.recetas.length == 0 && this.pagina > 0){
@@ -69,6 +70,11 @@ export class PaginaPrincipalComponent {
   
   }
 
+  cambiarFiltro(nuevoFiltro : string){
+    console.log(nuevoFiltro);
+    this.filtro = nuevoFiltro;
+    this.actualizarLista();
 
+  }
 
 }

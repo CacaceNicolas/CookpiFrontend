@@ -24,6 +24,7 @@ export class Usuario {
   altura: number = 0;
   reqCalorico: number = 0;
   edad: number = 0;
+  caloriasRestantes : number = this.reqCalorico
 
   consumos: {nombre : string, momentoDelDia : string, calorias : number}[] =  [];
 
@@ -35,7 +36,7 @@ export class Usuario {
 
     const mailResp = await this.apiservice.obtenerMail()
     this.mail = mailResp.data
-
+    
     this.usuario = (await this.apiservice.obtenerUsuario(this.mail)).data
 
     this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
@@ -48,13 +49,21 @@ export class Usuario {
     this.altura = this.usuario.altura
     this.reqCalorico = this.usuario.reqCalorico
     this.edad = this.usuario.edad
-
-
+    this.caloriasRestantes = this.reqCalorico
+    this.calcularCalorias()
 
 
   }
 
 
+  calcularCalorias(){
+
+    this.consumos.forEach((consumo) => {
+      this.caloriasRestantes -= consumo.calorias
+      console.log(this.caloriasRestantes)
+    });
+
+  }
 
 
 }

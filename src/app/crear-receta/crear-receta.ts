@@ -15,6 +15,8 @@ export class CrearReceta {
   descripcion = new FormControl("");
   procedimiento = new FormControl("");
   momentoDelDia = new FormControl("");
+  dieta = new FormControl("");
+  tiempo = new FormControl(0);
 
   cantIngredientes : number = 2
   ingredientesSeleccionados: { codigo: string, cantidad: number }[] = Array(this.cantIngredientes).fill(null).map(() => ({
@@ -56,7 +58,7 @@ reducirIngredientes(): void {
 
 mostrarIngredientes(): void{
 
-  if(this.momentoDelDia.value != null &&this.nombre.value != null && this.descripcion.value != null && this.procedimiento.value != null && this.ingredientesSeleccionados != null && this.ingredientesSeleccionados[0].codigo != ""){
+  if(this.momentoDelDia.value != null &&this.nombre.value != null && this.descripcion.value != null && this.procedimiento.value != null && this.ingredientesSeleccionados != null && this.ingredientesSeleccionados[0].codigo != "" && this.tiempo.value != null && this.tiempo.value > 0 && this.dieta.value != null){
 
     console.log(this.ingredientesSeleccionados)
 
@@ -65,7 +67,9 @@ mostrarIngredientes(): void{
     this.descripcion.value,
     this.procedimiento.value,
     this.momentoDelDia.value,
-    this.ingredientesSeleccionados
+    this.ingredientesSeleccionados,
+    this.tiempo.value,
+    this.dieta.value
   
   )
 }

@@ -14,7 +14,22 @@
       <option value="Postre">Postre</option>
       <option value="Snack">Snack</option>
     </select>
+
   </div>
+
+  <div class="campo-horizontal momento-dia">
+    <label for="momento">Dieta:</label>
+    <select [formControl]="dieta">
+      <option value="Vegetariana">Vegetariana</option>
+      <option value="Keto">Keto</option>
+      <option value="No-dieta">No dieta</option>
+      <option value="No-Carbs">No Carbs</option>
+      <option value="High-Prote">High Prote</option>
+    </select>
+    
+  </div>
+  <label for="momento">Tiempo: </label>
+  <input [formControl]="tiempo" type="number" min="1" placeholder="Tiempo en minutos" />
 
   <div class="ingredientes-container">
     <h3>INGREDIENTES</h3>

@@ -20,8 +20,10 @@ export class Receta {
   libros: { id: string, nombre: string }[] = [];
   mostrarSelect: boolean = false;
   mail : string = "";
-  libroSeleccionado : string = ""
-  constructor(private apiservice: Servicio, private route: ActivatedRoute) {}
+  libroSeleccionado : string = "";
+  constructor(private apiservice: Servicio, private route: ActivatedRoute) {};
+  yaLikeada : boolean = false;
+  likes : number = 0;
 
   async ngOnInit() {
     try {
@@ -33,7 +35,9 @@ export class Receta {
       this.procedimiento = resp.data.procedimiento;
       this.descripcion = resp.data.descripcion;
       this.nombre = resp.data.nombre;
+      this.likes = resp.data.cantLikes;
       console.log(this.mail)
+      this.isYaLikeada()
     } catch (error) {
       console.error("Error al obtener la receta:", error);
     }
@@ -71,10 +75,17 @@ export class Receta {
 
 
   async like(){
-    this.apiservice.like(+this.idReceta, this.mail);
+    console.log("sL")
+    console.log(this.yaLikeada)
+    if (!this.yaLikeada){
+      this.apiservice.like(+this.idReceta, this.mail);
+    }
 
+  }
 
-
+  async isYaLikeada(){
+    
+    this.yaLikeada = (await this.apiservice.yaLikeada(+this.idReceta, this.mail)).data
   }
 
 
