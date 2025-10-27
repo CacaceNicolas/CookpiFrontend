@@ -1,0 +1,101 @@
+/* Estilos solo visuales, sin alterar el HTML */
+:root {
+  --bg: #f4f4f4;
+  --card: #ffffff;
+  --primary: #2f7a5e;
+  --border: #dddddd;
+  --muted: #777;
+  --radius: 0.6em;
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+body {
+  background: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 1.5em;
+}
+
+form {
+  background: var(--card);
+  width: 100%;
+  max-width: 28em;
+  padding: 1.2em;
+  border-radius: var(--radius);
+  box-shadow: 0 0.5em 1.2em rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9em;
+}
+
+h1 {
+  font-size: 1.3em;
+  font-weight: 800;
+  margin: 0 0 0.4em 0;
+  color: #222;
+}
+
+p {
+  color: var(--muted);
+  margin: 0 0 1em 0;
+  font-size: 0.9em;
+}
+
+label {
+  font-weight: 600;
+  font-size: 0.9em;
+  color: #333;
+  margin-bottom: 0.3em;
+  display: block;
+}
+
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 0.7em;
+  border-radius: 0.5em;
+  border: 1px solid var(--border);
+  font-size: 0.95em;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0.3em rgba(47, 122, 94, 0.3);
+}
+
+button {
+  border: none;
+  border-radius: 0.5em;
+  padding: 0.7em 1em;
+  font-size: 0.95em;
+  font-weight: 600;
+  cursor: pointer;
+  
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+button[type="submit"] {
+  background: var(--primary);
+  color: white;
+}
+
+button[type="button"] {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: #333;
+}
+
+@media (min-width: 40em) {
+  form {
+    padding: 1.5em;
+  }
+}
+

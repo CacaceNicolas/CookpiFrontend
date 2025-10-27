@@ -38,6 +38,10 @@
   <!-- Descripción -->
   <h3 class="subtitulo">Descripción:</h3>
   <p class="texto">{{ descripcion }}</p>
+  
+  <!-- Likes -->
+  <h3 class="subtitulo">Likes:</h3>
+  <p class="texto">{{ likes }}</p>
 
   <!-- Procedimiento -->
   <h3 class="subtitulo">Procedimiento:</h3>
@@ -55,6 +59,15 @@
     <button class="btn-agregar" (click)="agregarALibro()">
        Agregar a libro
     </button>
+    <button class="btn-agregar" (click)="agregarConsumo()">
+       Agregar consumo
+    </button>
+    <button class="btn-agregar" (click)="like()">
+       Like
+    </button>
+    
+
+
   </div>
 
   <footer class="footer">
@@ -63,3 +76,4 @@
     <a href="#">Contacto</a>
   </footer>
 </div>
+

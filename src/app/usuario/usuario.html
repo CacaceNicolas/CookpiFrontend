@@ -1,0 +1,20 @@
+<p>usuario works!</p>
+
+
+<h1>{{nombre}}</h1>
+<h4>edad: {{edad}}</h4>
+<h2>{{descripcion}}</h2>
+<h2> peso: {{peso}}</h2>
+<h2>altura: {{altura}}</h2>
+<h2>reqCalorico: {{reqCalorico}}</h2>
+<h2>calorias restantes: {{caloriasRestantes}}</h2>
+
+
+<h2>Consumos</h2>
+
+  <li *ngFor="let item of consumos">
+    <h3>{{item.nombre}}</h3>
+    <p>{{item.momentoDelDia}}</p>
+    <p>{{item.calorias}}</p>
+  </li>
+

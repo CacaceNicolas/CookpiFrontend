@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Servicio } from '../servicio';
 import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -21,8 +20,10 @@ export class Receta {
   libros: { id: string, nombre: string }[] = [];
   mostrarSelect: boolean = false;
   mail : string = "";
-  libroSeleccionado : string = ""
-  constructor(private apiservice: Servicio, private route: ActivatedRoute) {}
+  libroSeleccionado : string = "";
+  constructor(private apiservice: Servicio, private route: ActivatedRoute) {};
+  yaLikeada : boolean = false;
+  likes : number = 0;
 
   async ngOnInit() {
     try {
@@ -34,13 +35,15 @@ export class Receta {
       this.procedimiento = resp.data.procedimiento;
       this.descripcion = resp.data.descripcion;
       this.nombre = resp.data.nombre;
+      this.likes = resp.data.cantLikes;
       console.log(this.mail)
+      this.isYaLikeada()
     } catch (error) {
       console.error("Error al obtener la receta:", error);
     }
 
 
-      try {
+    try {
       const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
       console.log(resp);
       console.log("Longitud: " + resp.length)
@@ -61,4 +64,29 @@ export class Receta {
     this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
     
   }
+
+  async agregarConsumo(){
+
+    this.apiservice.agregarConsumo(+this.idReceta, this.mail)
+    
+
+
+  }
+
+
+  async like(){
+    console.log("sL")
+    console.log(this.yaLikeada)
+    if (!this.yaLikeada){
+      this.apiservice.like(+this.idReceta, this.mail);
+    }
+
+  }
+
+  async isYaLikeada(){
+    
+    this.yaLikeada = (await this.apiservice.yaLikeada(+this.idReceta, this.mail)).data
+  }
+
+
 }

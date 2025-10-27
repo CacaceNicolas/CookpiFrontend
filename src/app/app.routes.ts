@@ -10,10 +10,10 @@ import { CrearReceta } from './crear-receta/crear-receta';
 import { CrearLibro } from './crear-libro/crear-libro';
 import { Receta } from './receta/receta';
 import { Libro } from './libro/libro';
-import { Nutricion } from './nutricion/nutricion';
+import { Usuario } from './usuario/usuario';
+
 
 export const routes: Routes = [
-  
   { path : "", component: PaginaPrincipalComponent},
   { path : "login", component: Login},
   { path : "signup", component: Signup},
@@ -22,7 +22,7 @@ export const routes: Routes = [
   { path : "crearReceta", component : CrearReceta},
   { path : "receta/:id", component : Receta},
   { path : "libro/:id", component : Libro},
-  { path : "nutricion", component : Nutricion, canActivate: [AuthGuard]},
   { path : "crearibro", component : CrearLibro, canActivate: [AuthGuard]},
+  { path : "usuario", component : Usuario, canActivate: [AuthGuard]},
   { path : "ingredientes", component : Ingredientes, canActivate: [AuthGuard]},
 ];

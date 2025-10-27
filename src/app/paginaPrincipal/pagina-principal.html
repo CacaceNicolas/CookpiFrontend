@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,19 +10,30 @@
 <body>
 
   <header class="top-bar">
-    <h1 class="logo">paginaPrincipal</h1>
-    <div class="icons">
-      <span class="icon">🔍</span>
-      <span class="icon">⚙️</span>
-    </div>
+    <input type="search" #busquedaInput placeholder="Buscar receta..." (keydown.enter)="buscar(busquedaInput.value)">
+  
   </header>
 
+  <div *ngFor = "let item of recetas">
+
+    <p>{{item.nombre}}</p>
+    <button (click) = "verReceta(item.id)">Ver</button>
+
+  </div>
+
+  
+    <button (click) = "restarPagina()"></button>
+    <button (click) = "sumarPagina()"></button>
+
+
+
+
   <nav class="categories">
-    <div class="category">CATEGORÍA 1</div>
-    <div class="category">CATEGORÍA 1</div>
-    <div class="category">CATEGORÍA 1</div>
-    <div class="category">CATEGORÍA 1</div>
-    <div class="category">CATEGORÍA 1</div>
+    <button (click) = "cambiarFiltro('Vegetariana')" class="category">Vegetariana</button>
+    <button (click) = "cambiarFiltro('Keto')" class="category">Keto</button>
+    <button (click) = "cambiarFiltro('No dieta')" class="category">No dieta</button> 
+    <button (click) = "cambiarFiltro('No-Carbs')" class="category">No carbs</button>
+    <button (click) = "cambiarFiltro('High-Prote')" class="category">High protein</button>
   </nav>
 
   <section class="featured">
@@ -58,8 +70,13 @@
 
 <section class="recomendaciones">
   <h3>Recomendaciones para vos...</h3>
+
+  <button (click) = "restarPagina()"></button>
+
   <div class="cards">
-    <div class="card" *ngFor="let receta of recetas">
+
+    <div class="card"  *ngFor="let receta of recetas">
+
       <div class="card-img"></div>
       <h4>{{ receta.nombre }}</h4>
       <p>Calorías: {{ receta.calorias }}</p>
@@ -68,6 +85,8 @@
       <p>Carbohidratos: {{ receta.carbohidratos }}</p>
     </div>
   </div>
+<button (click) = "sumarPagina()"></button>
+ 
 </section>
 
   <section class="tendencias">

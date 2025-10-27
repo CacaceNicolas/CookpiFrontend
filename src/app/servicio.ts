@@ -20,13 +20,37 @@ export class Servicio {
         token : localStorage.getItem("jwt")
     });
   }
-    async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[]) {
+   
+  async obtenerRecetas(pagina : number, busqueda : string, buscar : boolean, filtro : string){
+    if (buscar){
+      if(filtro == ""){
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda);
+      }
+      else{
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda + `/` + filtro);
+      }
+    }
+    else{
+      if (filtro == ""){
+        return await axios.get(`${this.url}/receta/pag/` + pagina);
+      }
+      else{
+        return await axios.get(`${this.url}/receta/pagf/` + pagina + `/` + filtro); 
+      }
+    }
+  }
+  
+  async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[], tiempo : number, dieta : string) {
     axios.post(`${this.url}/receta`, {
         nombre: nombre,
         descripcion : descripcion,
         momentoDelDia: momentoDelDia,
         procedimiento : procedimiento,
         ingredientes : ingredientes,
+        cantLikes : 0,
+        tiempo : tiempo,
+        dieta : dieta,
+
         token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
@@ -175,8 +199,17 @@ export class Servicio {
 
 
   async obtenerMail(){
+
     return await axios.get(`${this.url}/login/mail`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  
   }
+
+  async obtenerUsuario(mail: string){
+
+    return await axios.get(`${this.url}/usuario/` + mail, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  
+  }
+
   
   async agregarRecetaALibro(idLibro : string, idReceta : string){
         axios.post(`${this.url}/libro/agregarReceta`,{
@@ -197,7 +230,10 @@ export class Servicio {
 
     return await axios.get(`${this.url}/libro/porid/` + idLibro)
 
+  }
 
+  async obtenerConsumoUsuario(mail: string){
+    return await axios.get(`${this.url}/consumo/` + mail)
   }
 
 
@@ -205,7 +241,20 @@ export class Servicio {
 
     return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
 
+  }
+
+  async like( idReceta : number, mail : string){
+
+    return await axios.post(`${this.url}/usuario/like`, {recetaId: idReceta, mail: mail}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+
 
   }
+
+  async yaLikeada( idReceta : number, mail : string){
+
+    return await axios.get(`${this.url}/usuario/like/` + mail + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+
+  }
+
 
 }
