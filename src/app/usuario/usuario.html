@@ -16,6 +16,7 @@
     <h2>Consumos del día...</h2>
     <ul>
       <li *ngFor="let item of consumos" class="consumo-item">
+        <button (click) = "borrarConsumo(item.id)">BORRAR</button>
         <h3>{{item.nombre}}</h3>
         <p><strong>Momento del día:</strong> {{item.momentoDelDia}}</p>
         <p><strong>Calorías:</strong> {{item.calorias}} kcal</p>

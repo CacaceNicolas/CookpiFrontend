@@ -11,30 +11,43 @@
 
   <header class="top-bar">
     <input type="search" #busquedaInput placeholder="Buscar receta..." (keydown.enter)="buscar(busquedaInput.value)">
-  
-  </header>
 
-  <div *ngFor = "let item of recetas">
-
-    <p>{{item.nombre}}</p>
-    <button (click) = "verReceta(item.id)">Ver</button>
-
-  </div>
-
-  
-    <button (click) = "restarPagina()"></button>
-    <button (click) = "sumarPagina()"></button>
-
-
-
-
-  <nav class="categories">
+    <nav class="categories">
     <button (click) = "cambiarFiltro('Vegetariana')" class="category">Vegetariana</button>
     <button (click) = "cambiarFiltro('Keto')" class="category">Keto</button>
     <button (click) = "cambiarFiltro('No dieta')" class="category">No dieta</button> 
     <button (click) = "cambiarFiltro('No-Carbs')" class="category">No carbs</button>
     <button (click) = "cambiarFiltro('High-Prote')" class="category">High protein</button>
+    <button (click) = "cambiarFiltro('')" class="category">X</button>
   </nav>
+
+  </header>
+<section class="recomendaciones">
+  <h3>Recomendaciones para vos...</h3>
+ <div class="cards">
+
+    <div class="card" *ngFor="let item of recetas">
+
+      <div class="card-img"></div>
+
+      <h4>{{ item.nombre }}</h4>
+      <p>Calorías: {{ item.calorias }}</p>
+      <p>Proteínas: {{ item.proteinas }}</p>
+      <p>Grasas: {{ item.grasas }}</p>
+      <p>Carbohidratos: {{ item.carbohidratos }}</p>
+      <button (click) = "verReceta(item.id)">Ver</button>
+  </div>
+</div>
+
+
+  
+    <button (click) = "restarPagina()"></button>
+    <button (click) = "sumarPagina()"></button>
+
+</section>
+
+
+  
 
   <section class="featured">
     <div class="featured-image"></div>
@@ -68,14 +81,15 @@
   </div>
 </section>
 
-<section class="recomendaciones">
-  <h3>Recomendaciones para vos...</h3>
 
-  <button (click) = "restarPagina()"></button>
+<section class="recomendaciones">
+  <h3>Según tu consumo...</h3>
+
+  <button (click) = "restarPaginaRecomendaciones()"><</button>
 
   <div class="cards">
 
-    <div class="card"  *ngFor="let receta of recetas">
+    <div class="card"  *ngFor="let receta of recomendacionesKcal">
 
       <div class="card-img"></div>
       <h4>{{ receta.nombre }}</h4>
@@ -83,35 +97,13 @@
       <p>Proteínas: {{ receta.proteinas }}</p>
       <p>Grasas: {{ receta.grasas }}</p>
       <p>Carbohidratos: {{ receta.carbohidratos }}</p>
+      <button (click) = "verReceta(receta.id)">Ver</button>
     </div>
   </div>
-<button (click) = "sumarPagina()"></button>
+<button (click) = "sumarPaginaRecomendaciones()">></button>
  
 </section>
 
-  <section class="tendencias">
-    <h3>Tendencias</h3>
-    <div class="trend-list">
-      <div class="trend">
-        <div class="trend-img"></div>
-        <p class="tag">T categoría</p>
-        <h4>Nombre receta</h4>
-        <p>tiempo</p>
-      </div>
-      <div class="trend">
-        <div class="trend-img"></div>
-        <p class="tag">T categoría</p>
-        <h4>Nombre receta</h4>
-        <p>tiempo</p>
-      </div>
-      <div class="trend">
-        <div class="trend-img"></div>
-        <p class="tag">T categoría</p>
-        <h4>Nombre receta</h4>
-        <p>tiempo</p>
-      </div>
-    </div>
-  </section>
 
 </body>
 </html>

@@ -256,5 +256,17 @@ export class Servicio {
 
   }
 
+  async obtenerRecomendaciones(pagina : number, kcal : number){
+
+    return await axios.get(`${this.url}/receta/pagr/` + pagina + `/` + kcal, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+
+  }
+
+  async borrarConsumo(mail : string, id : number){
+
+    return await axios.delete(`${this.url}/consumo/${mail}/${id}`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+
+  }
+
 
 }
