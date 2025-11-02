@@ -24,25 +24,17 @@ export class Usuario {
   altura: number = 0;
   reqCalorico: number = 0;
   edad: number = 0;
-  caloriasRestantes : number = this.reqCalorico
+  caloriasRestantes : number = 0;
 
-  consumos: {nombre : string, momentoDelDia : string, calorias : number}[] =  [];
-
-
-
-
+  consumos: {id: number, nombre : string, momentoDelDia : string, calorias : number}[] =  [];
 
   async ngOnInit(){
 
     const mailResp = await this.apiservice.obtenerMail()
     this.mail = mailResp.data
-    
     this.usuario = (await this.apiservice.obtenerUsuario(this.mail)).data
-
-    this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
-
+    await this.cargarConsumos();
     console.log(this.consumos);
-
     this.nombre = this.usuario.nombre
     this.descripcion = this.usuario.descripcion
     this.peso = this.usuario.peso
@@ -51,19 +43,27 @@ export class Usuario {
     this.edad = this.usuario.edad
     this.caloriasRestantes = this.reqCalorico
     this.calcularCalorias()
-
-
+    
   }
 
 
   calcularCalorias(){
-
+    this.caloriasRestantes = this.reqCalorico
     this.consumos.forEach((consumo) => {
       this.caloriasRestantes -= consumo.calorias
-      console.log(this.caloriasRestantes)
     });
 
   }
 
+  async cargarConsumos(){
+    this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
+  }
+
+  async borrarConsumo(id : number){
+    await this.apiservice.borrarConsumo(this.mail,id);
+    await this.cargarConsumos();
+    await this.calcularCalorias();
+     
+  };
 
 }

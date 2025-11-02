@@ -1,0 +1,53 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #EAE9E7;
+  color: #000000;
+  margin: 0;
+  padding: 20px;
+}
+
+.perfil-usuario {
+  max-width: 600px;
+  margin: auto;
+  background-color: #fffaf0;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  align-items: center;
+  color: #b9920f;
+  margin-bottom: 5px;
+}
+
+.subtitulo {
+  font-size: 1rem;
+  color: #000000;
+}
+
+.descripcion {
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.datos-fisicos div {
+  margin: 8px 0;
+  background-color: #f6f6c5;
+  padding: 8px;
+  border-radius: 6px;
+  color: #000000;
+}
+
+.consumos h2 {
+  margin-top: 30px;
+  color: #000000;
+}
+
+.consumo-item {
+  background-color: #fff7d0;
+  border-left: 6px solid #cc9c0b;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+}
