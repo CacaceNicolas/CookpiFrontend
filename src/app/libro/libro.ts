@@ -31,6 +31,7 @@ async ngOnInit(){
   this.nombre  = resp.nombre;
 
   this.obtenerRecetas()
+
 }
 
 async obtenerRecetas(){
