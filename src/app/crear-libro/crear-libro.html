@@ -1,12 +1,24 @@
-<p>crear-libro works!</p>
+<div class="crear-libro-container">
+  <div class="header">
+    <h1>Nuevo libro de recetas</h1>
+    <p>Organizá tus recetas en un solo lugar!!</p>
+  </div>
 
+  <form class="formulario">
+    <label for="nombre">Nombre</label>
+    <input
+      id="nombre"
+      [formControl]="nombre"
+      placeholder="Ej: Postres riquis"
+    />
 
-    <label>Nombre</label>
-    <input [formControl] = "nombre">
+    <label for="descripcion">Descripción</label>
+    <textarea
+      id="descripcion"
+      [formControl]="descripcion"
+      placeholder="Comentanos de que trata tu libro..."
+    ></textarea>
 
-    <label>Descripcion</label>
-    <input [formControl] = "descripcion">
-
-    <button (click)="crearLibro()">Crear Libro</button>
-
-
+    <button type="button" (click)="crearLibro()">Crear libro</button>
+  </form>
+</div>

@@ -1,8 +1,21 @@
-<!-- libro.html -->
 <div class="libro-page">
   <header class="libro-header">
     <h1 class="libro-title">{{ nombre }}</h1>
-
+    <p class="libro-descripcion">{{ descripcion }}</p>
   </header>
 
-  
+  <section class="recetas-section">
+    <h2>Recetas del libro</h2>
+
+    <div class="recetas-lista" *ngIf="recetas.length > 0">
+      <div class="receta-card" *ngFor="let receta of recetas" >
+        <div (click)="verReceta(receta.id)">
+        <h3 class="receta-nombre">{{ receta.nombre }}</h3>
+        <p class="receta-descripcion">{{ receta.descripcion }}</p>
+        </div>
+        <button (click)="eliminarReceta(receta.id)">Borrar</button>
+      </div>
+      
+    </div>
+  </section>
+</div>

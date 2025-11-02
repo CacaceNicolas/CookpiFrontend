@@ -1,101 +1,79 @@
-/* Estilos solo visuales, sin alterar el HTML */
 :root {
-  --bg: #f4f4f4;
-  --card: #ffffff;
-  --primary: #2f7a5e;
-  --border: #dddddd;
-  --muted: #777;
-  --radius: 0.6em;
-  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --marron-oscuro: #3e350e;
+  --mostaza: #daad29;
+  --blanco: #eae9e7;
+  --marron: #794515;
+  --verde-oliva: #79792e;
+  --amarillo-claro: #f2dd6c;
 }
 
-body {
-  background: var(--bg);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  padding: 1.5em;
+
+.crear-libro-container {
+  background-color: var(--blanco);
+  color: var(--marron-oscuro);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 3rem auto;
+  text-align: center;
 }
 
-form {
-  background: var(--card);
-  width: 100%;
-  max-width: 28em;
-  padding: 1.2em;
-  border-radius: var(--radius);
-  box-shadow: 0 0.5em 1.2em rgba(0, 0, 0, 0.08);
+.header h1 {
+  color: var(--marron);
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.header p {
+  color: var(--verde-oliva);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.formulario {
   display: flex;
   flex-direction: column;
-  gap: 0.9em;
-}
-
-h1 {
-  font-size: 1.3em;
-  font-weight: 800;
-  margin: 0 0 0.4em 0;
-  color: #222;
-}
-
-p {
-  color: var(--muted);
-  margin: 0 0 1em 0;
-  font-size: 0.9em;
+  gap: 1rem;
+  text-align: left;
 }
 
 label {
   font-weight: 600;
-  font-size: 0.9em;
-  color: #333;
-  margin-bottom: 0.3em;
-  display: block;
+  color: var(--marron-oscuro);
 }
 
-input[type="text"],
+input,
 textarea {
   width: 100%;
-  padding: 0.7em;
-  border-radius: 0.5em;
-  border: 1px solid var(--border);
-  font-size: 0.95em;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.7rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid var(--verde-oliva);
+  background-color: #fffaf0;
+
+  resize: none;
 }
 
-input[type="text"]:focus,
+input:focus,
 textarea:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0.3em rgba(47, 122, 94, 0.3);
+  outline: none;
+  border-color: var(--mostaza);
+  box-shadow: 0 0 5px var(--mostaza);
 }
 
 button {
+  margin-top: 1.2rem;
+  padding: 0.8rem 1.2rem;
+  background-color: var(--mostaza);
+  color: var(--blanco);
+  font-weight: bold;
   border: none;
-  border-radius: 0.5em;
-  padding: 0.7em 1em;
-  font-size: 0.95em;
-  font-weight: 600;
+  border-radius: 1rem;
   cursor: pointer;
-  
+  transition: 0.3s;
 }
 
 button:hover {
-  transform: scale(1.02);
+  background-color: var(--marron);
+  transform: scale(1.03);
 }
-
-button[type="submit"] {
-  background: var(--primary);
-  color: white;
-}
-
-button[type="button"] {
-  background: transparent;
-  border: 1px solid var(--border);
-  color: #333;
-}
-
-@media (min-width: 40em) {
-  form {
-    padding: 1.5em;
-  }
-}
-

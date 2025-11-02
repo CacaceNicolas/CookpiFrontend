@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Servicio } from '../servicio';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-libro',
@@ -10,24 +10,23 @@ import { Servicio } from '../servicio';
   templateUrl: './crear-libro.html',
   styleUrl: './crear-libro.css'
 })
+
 export class CrearLibro {
 
   nombre = new FormControl("");
   descripcion = new FormControl("");
+  id : number = 0;
 
-  constructor(private apiservice: Servicio) {}
+  constructor(private apiservice: Servicio, private router: Router) {}
 
-  crearLibro() : void{
-    this.apiservice.agregarLibro(this.nombre.value ?? "", this.descripcion.value ?? "")
+  async crearLibro() : Promise<void>{
+    if (this.nombre.value != ""){
+      this.id = (  await this.apiservice.agregarLibro(this.nombre.value!, this.descripcion.value!)).data;
+      this.router.navigate(['/libro/' + this.id]);
+    }
+    else{
+      window.alert("El nombre no puede estar vacio");
+    }
   }
-  mostrarLibros(): void{
-
-  if (this.nombre.value != null && this.descripcion.value !=null){
-    this.apiservice.agregarLibro(
-    this.nombre.value,
-    this.descripcion.value
-  )
-}
-}
-
+  
 }

@@ -14,14 +14,14 @@ import { Usuario } from './usuario/usuario';
 
 
 export const routes: Routes = [
-  { path : "", component: PaginaPrincipalComponent},
+  { path : "", component: PaginaPrincipalComponent, canActivate: [AuthGuard]},
   { path : "login", component: Login},
   { path : "signup", component: Signup},
   { path : "recuperarPassword/:token", component : RecuperarPassword},
   { path : "enviarCorreoPassword", component : EnviarCorreoPassword},
-  { path : "crearReceta", component : CrearReceta},
-  { path : "receta/:id", component : Receta},
-  { path : "libro/:id", component : Libro},
+  { path : "crearReceta", component : CrearReceta, canActivate: [AuthGuard]},
+  { path : "receta/:id", component : Receta, canActivate: [AuthGuard]},
+  { path : "libro/:id", component : Libro, canActivate: [AuthGuard]},
   { path : "crearibro", component : CrearLibro, canActivate: [AuthGuard]},
   { path : "usuario", component : Usuario, canActivate: [AuthGuard]},
   { path : "ingredientes", component : Ingredientes, canActivate: [AuthGuard]},

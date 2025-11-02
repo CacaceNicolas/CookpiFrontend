@@ -4,6 +4,7 @@ import { HttpParams } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Ingredientes } from '../ingredientes/ingredientes';
 
 @Component({
   selector: 'app-receta',
@@ -24,6 +25,14 @@ export class Receta {
   constructor(private apiservice: Servicio, private route: ActivatedRoute) {};
   yaLikeada : boolean = false;
   likes : number = 0;
+  ingredientes : {nombre: string, cantidad: number}[] = [];
+  calorias : number = 0;
+  carbohidratos : number = 0;
+  proteinas : number = 0;
+  grasas : number = 0;
+
+
+
 
   async ngOnInit() {
     try {
@@ -35,9 +44,14 @@ export class Receta {
       this.procedimiento = resp.data.procedimiento;
       this.descripcion = resp.data.descripcion;
       this.nombre = resp.data.nombre;
+      this.calorias = resp.data.calorias;
+      this.carbohidratos = resp.data.carbohidratos;
+      this.proteinas = resp.data.proteinas;
+      this.grasas = resp.data.grasas;
       this.likes = resp.data.cantLikes;
-      console.log(this.mail)
-      this.isYaLikeada()
+      console.log(this.mail);
+      this.isYaLikeada();
+      this.obtenerIngredientes();
     } catch (error) {
       console.error("Error al obtener la receta:", error);
     }
@@ -89,4 +103,9 @@ export class Receta {
   }
 
 
-}
+
+  async obtenerIngredientes(){
+    console.log("Obteniendo ingredientes")
+    this.ingredientes = (await this.apiservice.obtenerIngredientesDeReceta(this.idReceta)).data;
+  
+  }}

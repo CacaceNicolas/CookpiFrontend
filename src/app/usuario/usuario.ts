@@ -1,6 +1,7 @@
 import { Servicio } from '../servicio';
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-usuario',
@@ -11,9 +12,9 @@ import { CommonModule } from '@angular/common';
   styleUrl: './usuario.css'
 })
 export class Usuario {
-  
-  
-  constructor(private apiservice : Servicio){}
+
+
+  constructor(private apiservice : Servicio, private router: Router){}
 
   usuario: any;
 
@@ -25,12 +26,9 @@ export class Usuario {
   reqCalorico: number = 0;
   edad: number = 0;
   caloriasRestantes : number = this.reqCalorico
+  libros: {id : number, nombre : string, descripcion : string}[] = [];
 
-  consumos: {nombre : string, momentoDelDia : string, calorias : number}[] =  [];
-
-
-
-
+  consumos: {id : number, nombre : string, momentoDelDia : string, calorias : number, cantidad : number}[] = [];
 
   async ngOnInit(){
 
@@ -51,7 +49,7 @@ export class Usuario {
     this.edad = this.usuario.edad
     this.caloriasRestantes = this.reqCalorico
     this.calcularCalorias()
-
+    this.obtenerLibros();
 
   }
 
@@ -59,10 +57,55 @@ export class Usuario {
   calcularCalorias(){
 
     this.consumos.forEach((consumo) => {
-      this.caloriasRestantes -= consumo.calorias
-      console.log(this.caloriasRestantes)
+      this.caloriasRestantes -= consumo.calorias * consumo.cantidad;
     });
 
+  }
+
+  async agregarConsumo(idReceta: number){
+    console.log("Agregando consumo de receta id: " + idReceta);
+    await this.apiservice.agregarConsumo(+idReceta, this.mail);
+    await this.actualizarInfo();  
+    console.log("llego hasta acá");
+  }
+
+  async borrarConsumo(idReceta: number){
+    console.log("Borrando consumo de receta id: " + idReceta);
+    await this.apiservice.borrarConsumo(this.mail, idReceta);
+    await this.actualizarInfo();
+  }
+
+  async obtenerLibros(){
+    const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
+    this.libros = resp;
+    console.log(this.libros);
+  }
+
+
+  async actualizarInfo(){
+    this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
+    this.caloriasRestantes = this.reqCalorico
+    this.calcularCalorias();
+    console.log(this.consumos)
+  }
+
+  verLibro(idLibro: number){
+    this.router.navigate(['/libro/' + idLibro]);
+  }
+
+  verReceta(idReceta: number){
+    this.router.navigate(['/receta/' + idReceta]);
+  }
+
+  eliminarLibro(idLibro: number){
+    console.log("Eliminando libro id: " + idLibro);
+    this.apiservice.eliminarLibro(idLibro.toString());
+    this.libros = [];
+    this.obtenerLibros();
+  }
+
+  async crearLibro(){
+    this.router.navigate(['/crearibro']);
   }
 
 

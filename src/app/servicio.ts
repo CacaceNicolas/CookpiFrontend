@@ -41,7 +41,7 @@ export class Servicio {
   }
   
   async agregarReceta(nombre: string, descripcion:string, procedimiento:string, momentoDelDia:string,ingredientes:{codigo:string, cantidad:number}[], tiempo : number, dieta : string) {
-    axios.post(`${this.url}/receta`, {
+    return axios.post(`${this.url}/receta`, {
         nombre: nombre,
         descripcion : descripcion,
         momentoDelDia: momentoDelDia,
@@ -56,7 +56,7 @@ export class Servicio {
   }
 
   async agregarLibro(nombre : string, descripcion : string){
-    axios.post(`${this.url}/libro`, {
+    return axios.post(`${this.url}/libro`, {
         nombre: nombre,
         descripcion : descripcion,
         token : localStorage.getItem("jwt")
@@ -134,7 +134,7 @@ export class Servicio {
     try {
 
       const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail, altura: altura, peso:peso, objetivo: objetivo, edad: edad, genero:genero});
-      console.log(response.data)
+
       
       localStorage.setItem("jwt", response.data)
 
@@ -164,7 +164,6 @@ export class Servicio {
       
     } catch (error) {
 
-      console.error('Error al iniciar sesion:', error);
       throw error;
 
     }
@@ -227,9 +226,7 @@ export class Servicio {
   }
 
   async obtenerLibroPorId(idLibro : string){
-
     return await axios.get(`${this.url}/libro/porid/` + idLibro)
-
   }
 
   async obtenerConsumoUsuario(mail: string){
@@ -238,15 +235,12 @@ export class Servicio {
 
 
   async agregarConsumo(idReceta : number, mail : string){
-
     return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
-
   }
 
   async like( idReceta : number, mail : string){
 
     return await axios.post(`${this.url}/usuario/like`, {recetaId: idReceta, mail: mail}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
-
 
   }
 
@@ -255,6 +249,35 @@ export class Servicio {
     return await axios.get(`${this.url}/usuario/like/` + mail + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
 
   }
+
+  async obtenerRecomendaciones(kcaloriasUsuario: number, paginaRecomendaciones: number){
+    return await axios.get(`${this.url}/receta/pagr/` + kcaloriasUsuario + `/` + paginaRecomendaciones);
+  }
+
+
+  async obtenerIngredientesDeReceta(idReceta: string){
+    return await axios.get(`${this.url}/receta/ingredientes/` + idReceta);
+  }
+
+
+  async borrarConsumo(mail: string, idReceta: number){
+    return await axios.delete(`${this.url}/consumo/` + mail + `/` + idReceta);
+  }
+
+  async obtenerRecetaDelDia(){
+    return await axios.get(`${this.url}/receta/del/dia`);
+  }
+
+
+  async eliminarRecetaDelLibro(idLibro : string, idReceta : string){
+    return await axios.delete(`${this.url}/libro/eliminarReceta/` + idLibro + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
+
+
+  async eliminarLibro(idLibro : string){ 
+    return await axios.delete(`${this.url}/libro/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+  }
+
 
 
 }

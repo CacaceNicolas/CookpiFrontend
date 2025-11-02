@@ -1,0 +1,57 @@
+.libro-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.libro-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.libro-title {
+  font-size: 2rem;
+  color: #3a3a3a;
+}
+
+.libro-descripcion {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+.recetas-section h2 {
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+}
+
+.recetas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.receta-card {
+  background: #f8f8f8;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.receta-nombre {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #222;
+}
+
+.receta-descripcion {
+  margin-top: 0.5rem;
+  color: #555;
+}
+
+.sin-recetas {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

@@ -1,20 +1,43 @@
-<p>usuario works!</p>
+<div class="perfil-usuario">
+  <header>
+    <h1>{{nombre}}</h1>
+    <p class="subtitulo">Edad: {{edad}} años</p>
+    <p class="descripcion">{{descripcion}}</p>
+  </header>
+
+  <section class="datos-fisicos">
+    <div><strong>Peso:</strong> {{peso}} kg</div>
+    <div><strong>Altura:</strong> {{altura}} cm</div>
+    <div><strong>Requerimiento calórico:</strong> {{reqCalorico}} kcal</div>
+    <div><strong>Calorías restantes:</strong> {{caloriasRestantes}} kcal</div>
+  </section>
+
+  <section class="consumos">
+    <h2>Consumos del día...</h2>
+    <ul>
+      <li *ngFor="let item of consumos" class="consumo-item">
+        <h3>{{item.nombre}}</h3>
+        <p><strong>Momento del día:</strong> {{item.momentoDelDia}}</p>
+        <p><strong>Calorías:</strong> {{item.calorias}} kcal</p>
+        <p>{{item.cantidad}}</p>
+        <button (click)="borrarConsumo(item.id)"><</button>
+        <button (click)="agregarConsumo(item.id)">></button>
+      </li>
+    </ul>
+  </section>
+  <section class="consumos">
+    <h2>Libros</h2>
+    <ul>
+    <li *ngFor="let item of libros" >
+      <div (click)="verLibro(item.id)"> 
+      <h3>{{item.nombre}}</h3>
+      <p>{{item.descripcion}}</p>
+      </div>
+      <button (click)="eliminarLibro(item.id)">Borrar</button>
+    </li>
+    </ul>
+    <button (click)="crearLibro()">Crear Libro</button>
+  </section>
 
 
-<h1>{{nombre}}</h1>
-<h4>edad: {{edad}}</h4>
-<h2>{{descripcion}}</h2>
-<h2> peso: {{peso}}</h2>
-<h2>altura: {{altura}}</h2>
-<h2>reqCalorico: {{reqCalorico}}</h2>
-<h2>calorias restantes: {{caloriasRestantes}}</h2>
-
-
-<h2>Consumos</h2>
-
-  <li *ngFor="let item of consumos">
-    <h3>{{item.nombre}}</h3>
-    <p>{{item.momentoDelDia}}</p>
-    <p>{{item.calorias}}</p>
-  </li>
-
+</div>
