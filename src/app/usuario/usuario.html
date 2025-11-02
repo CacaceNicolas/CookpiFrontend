@@ -16,11 +16,28 @@
     <h2>Consumos del día...</h2>
     <ul>
       <li *ngFor="let item of consumos" class="consumo-item">
-        <button (click) = "borrarConsumo(item.id)">BORRAR</button>
         <h3>{{item.nombre}}</h3>
         <p><strong>Momento del día:</strong> {{item.momentoDelDia}}</p>
         <p><strong>Calorías:</strong> {{item.calorias}} kcal</p>
+        <p>{{item.cantidad}}</p>
+        <button (click)="borrarConsumo(item.id)"><</button>
+        <button (click)="agregarConsumo(item.id)">></button>
       </li>
     </ul>
   </section>
+  <section class="consumos">
+    <h2>Libros</h2>
+    <ul>
+    <li *ngFor="let item of libros" >
+      <div (click)="verLibro(item.id)"> 
+      <h3>{{item.nombre}}</h3>
+      <p>{{item.descripcion}}</p>
+      </div>
+      <button (click)="eliminarLibro(item.id)">Borrar</button>
+    </li>
+    </ul>
+    <button (click)="crearLibro()">Crear Libro</button>
+  </section>
+
+
 </div>

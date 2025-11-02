@@ -22,10 +22,14 @@ export class PaginaPrincipalComponent {
   paginaRec = 0;
   busqueda = "";
   filtro : string = "";
+  recomendacionesKcal : any[] = [];
+  paginaRecomendaciones = 0;
+  kcaloriasUsuario = 0;
+  usuario: any;
   mail : string = "";
-  consumos: {nombre : string, momentoDelDia : string, calorias : number}[] =  [];
-  reqCalorico : number =  0;
-  caloriasRestantes : number = 0;
+  consumos: {calorias : number}[] =  [];
+  recetaDelDia: {nombre : string, descripcion : string, tiempo : number, carbohidratos : number, proteinas : number, grasas : number, calorias : number}  = {nombre : "", descripcion : "", tiempo : 0, carbohidratos : 0, proteinas : 0, grasas : 0, calorias : 0};
+
 
   constructor(private servicio: Servicio, @Inject(Router) private router : Router) {}
 
@@ -44,7 +48,17 @@ export class PaginaPrincipalComponent {
     
     try {
       this.actualizarLista()
-      this.obtenerRecomendaciones()
+      const mailResp = await this.servicio.obtenerMail()
+    this.mail = mailResp.data
+    
+    this.usuario = (await this.servicio.obtenerUsuario(this.mail)).data
+
+    this.consumos = (await this.servicio.obtenerConsumoUsuario(this.mail)).data
+
+    this.kcaloriasUsuario = this.usuario.reqCalorico
+    this.calcularCalorias()
+    this.actualizarRecomendaciones()
+    this.obtenerRecetaDelDia()
     } catch (error) {
       console.error('Error cargando las recetas', error);
     }  
@@ -55,21 +69,32 @@ export class PaginaPrincipalComponent {
       const itemsAnterior = this.recetas;
       if(this.busqueda == ""){
       this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,false, this.filtro)).data;
-      }
+    }
       else{
         this.recetas = (await this.servicio.obtenerRecetas(this.pagina, this.busqueda,true, this.filtro)).data;
+        
       }
   
       if (this.recetas.length == 0 && this.pagina > 0){
         this.recetas = itemsAnterior
         this.pagina -= 1
       }
-  }
+    }
 
+    async actualizarRecomendaciones() {
+      const itemsAnterior = this.recomendacionesKcal;
+      this.recomendacionesKcal = (await this.servicio.obtenerRecomendaciones(this.kcaloriasUsuario, this.paginaRecomendaciones)).data;
+      if (this.recomendacionesKcal.length == 0 && this.paginaRecomendaciones > 0) {
+        this.recomendacionesKcal = itemsAnterior;
+        this.paginaRecomendaciones -= 1;
+        
+      }
+    }
   buscar(cadena : string){
     this.busqueda = cadena
     this.actualizarLista()
   }
+
 
   async restarPagina(){
     if (this.pagina > 0){
@@ -83,6 +108,20 @@ export class PaginaPrincipalComponent {
     this.actualizarLista()
   }
 
+
+    async restarPaginaRec(){
+    if (this.paginaRecomendaciones > 0){
+      this.paginaRecomendaciones -= 1
+    }
+    this.actualizarRecomendaciones()
+  }
+
+  async sumarPaginaRec(){
+    this.paginaRecomendaciones += 1
+    this.actualizarRecomendaciones()
+  }
+
+
   async verReceta(id : number){
   
     this.router.navigate(['/receta/' + id]);
@@ -90,45 +129,27 @@ export class PaginaPrincipalComponent {
   }
 
   cambiarFiltro(nuevoFiltro : string){
-    console.log(nuevoFiltro);
     this.filtro = nuevoFiltro;
     this.actualizarLista();
 
   }
 
-
   calcularCalorias(){
 
     this.consumos.forEach((consumo) => {
-      this.caloriasRestantes -= consumo.calorias
+      this.kcaloriasUsuario -= consumo.calorias
     });
 
   }
 
-  async restarPaginaRecomendaciones(){
-    if (this.paginaRec > 0){
-      this.paginaRec -= 1
-    }
-    this.obtenerRecomendaciones()
+  async obtenerRecetaDelDia(){
+    console.log(await this.servicio.obtenerRecetaDelDia());
+
+    this.recetaDelDia = (await this.servicio.obtenerRecetaDelDia()).data;
+   
   }
 
-  async sumarPaginaRecomendaciones(){
-    this.paginaRec += 1
-    this.obtenerRecomendaciones()
-  }
-
-
-  
-  async obtenerRecomendaciones(){
-
-    const itemsAnterior = this.recomendacionesKcal;
-    
-      
-    this.recomendacionesKcal = (await this.servicio.obtenerRecomendaciones(this.paginaRec, this.caloriasRestantes)).data;
-
-    if (this.recomendacionesKcal.length == 0 && this.paginaRec > 0){
-      this.recomendacionesKcal = itemsAnterior
-      this.paginaRec -= 1
-    }
+  irAPaginaUsuario(){
+    this.router.navigate(['/usuario']);
   }
 }

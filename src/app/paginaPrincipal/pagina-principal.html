@@ -19,7 +19,25 @@
     <button (click) = "cambiarFiltro('No-Carbs')" class="category">No carbs</button>
     <button (click) = "cambiarFiltro('High-Prote')" class="category">High protein</button>
     <button (click) = "cambiarFiltro('')" class="category">X</button>
+  
+    <div class="user-icon" (click)="irAPaginaUsuario()">
+
+    <svg xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M4 21v-2a4 4 0 0 1 3-3.87"/>
+      <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+    </svg>
+    </div>
+  
   </nav>
+
+
 
   </header>
 <section class="recomendaciones">
@@ -45,38 +63,18 @@
     <button (click) = "sumarPagina()"></button>
 
 </section>
-
-
   
-
-  <section class="featured">
-    <div class="featured-image"></div>
-    <div class="featured-text">
-      <h2>Receta del día</h2>
-      <h3>NOMBRE RECETA</h3>
-      <p class="tiempo">tiempo prod.</p>
-      <p class="descripcion">
-        Típico de muchos países <br>
-        Los ingredientes que esta receta merece <br>
-        Haciendo de este postre inolvidable <br>
-        esta receta lleva el inconfundible <br>
-        perfume de la canela
-      </p>
-      <a href="#">continuar leyendo...</a>
-    </div>
-  </section>
-  
-  <section class="featured" *ngIf="recetaDestacada">
+  <section class="featured" *ngIf="recetaDelDia">
   <div class="featured-image"></div>
   <div class="featured-text">
     <h2>Receta del día</h2>
-    <h3>{{ recetaDestacada.nombre }}</h3>
-    <p class="tiempo">{{ recetaDestacada.tiempo || 'tiempo estimado' }}</p>
+    <h3>{{ recetaDelDia.nombre }}</h3>
+    <p class="tiempo">{{ recetaDelDia.tiempo || 'tiempo estimado' }}</p>
     <p class="descripcion">
-      Calorías: {{ recetaDestacada.calorias }}<br>
-      Proteínas: {{ recetaDestacada.proteinas }}<br>
-      Grasas: {{ recetaDestacada.grasas }}<br>
-      Carbohidratos: {{ recetaDestacada.carbohidratos }}
+      Calorías: {{ recetaDelDia.calorias }}<br>
+      Proteínas: {{ recetaDelDia.proteinas }}<br>
+      Grasas: {{ recetaDelDia.grasas }}<br>
+      Carbohidratos: {{ recetaDelDia.carbohidratos }}
     </p>
   </div>
 </section>
@@ -85,7 +83,7 @@
 <section class="recomendaciones">
   <h3>Según tu consumo...</h3>
 
-  <button (click) = "restarPaginaRecomendaciones()"><</button>
+  <button (click) = "restarPaginaRec()"><</button>
 
   <div class="cards">
 
@@ -100,7 +98,7 @@
       <button (click) = "verReceta(receta.id)">Ver</button>
     </div>
   </div>
-<button (click) = "sumarPaginaRecomendaciones()">></button>
+<button (click) = "sumarPaginaRec()">></button>
  
 </section>
 

@@ -43,7 +43,7 @@
     <div class="botones-ingredientes">
       <button (click)="incrementarIngredientes()">Agregar ingrediente</button>
       <button (click)="reducirIngredientes()">Quitar ingrediente</button>
-      <button (click)="mostrarIngredientes()">Mostrar ingredientes</button>
+
     </div>
   </div>
 
@@ -56,4 +56,6 @@
     <label for="procedimiento">Procedimiento:</label>
     <textarea id="procedimiento" [formControl]="procedimiento"></textarea>
   </div>
+
+  <button (click)="crearReceta()">Crear receta</button>
 </div>

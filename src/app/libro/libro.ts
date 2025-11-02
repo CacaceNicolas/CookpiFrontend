@@ -2,9 +2,7 @@ import { Component } from '@angular/core';
 import { Servicio } from '../servicio';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Route } from '@angular/router';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-libro',
@@ -13,10 +11,10 @@ import { Router } from '@angular/router';
   styleUrl: './libro.css'
 })
 export class Libro {
-  
-constructor(private apiservice: Servicio, private route: ActivatedRoute) {}
 
-recetas : { nombre: string, descripcion: string }[] = [] 
+constructor(private apiservice: Servicio, private route: ActivatedRoute, private router: Router) {}
+
+recetas : {id: number, nombre: string, descripcion: string }[] = [] 
 nombre : string = ""
 descripcion : string = ""
 idLibro : string = ""
@@ -41,12 +39,27 @@ async obtenerRecetas(){
   const respReceta = (await this.apiservice.obtenerRecetasPorLibro(this.idLibro)).data;
   console.log(respReceta)
   for (let i = 0; i < respReceta.length; i++) {
+  console.log(respReceta[i])
   this.recetas.push(respReceta[i])
-    //this.recetas.push({nombre : respReceta[i].nombre,descripcion: respReceta[i].descripcion})
   }
 
-  console.log(this.recetas);
+ 
 
 }
+
+  async verReceta(id : number){
+  
+    this.router.navigate(['/receta/' + id]);
+  
+  }
+
+
+  async eliminarReceta(id : number){
+    console.log("eliminar receta " + id + " del libro " + this.idLibro);
+    await this.apiservice.eliminarRecetaDelLibro(this.idLibro, id.toString());
+    this.recetas = []
+    this.obtenerRecetas();
+  }
+
 
 }

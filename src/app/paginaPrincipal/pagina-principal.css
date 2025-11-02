@@ -18,14 +18,58 @@ body {
 }
 
 .top-bar {
-  display: flex;
-  align-items: center;     
-  justify-content: space-between;
-  flex-wrap: wrap;      
-  gap: 1em;
-  background-color: #f5f5f5;
+  background-color: #fff;
   padding: 0.8em 1em;
-  border-radius: 0.6em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+  position: relative; 
+  margin-bottom: 3em;
+}
+
+.top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 96%;
+  height: 3px; 
+
+  background-color: #000000; 
+  border-radius: 2px;
+}
+
+
+.user-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: #f5f5f5; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 2px solid #ddd;
+}
+
+.user-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #555;
+  transition: stroke 0.2s ease, transform 0.2s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-icon:hover svg {
+  stroke: #000;
 }
 
 
