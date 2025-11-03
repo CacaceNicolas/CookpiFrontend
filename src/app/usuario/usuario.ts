@@ -108,5 +108,13 @@ export class Usuario {
     this.router.navigate(['/crearibro']);
   }
 
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
+
+  irAPaginaUsuario(){
+    this.router.navigate(['/usuario']);
+  }
+
 
 }

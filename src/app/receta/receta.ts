@@ -5,6 +5,9 @@ import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ingredientes } from '../ingredientes/ingredientes';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-receta',
@@ -22,7 +25,7 @@ export class Receta {
   mostrarSelect: boolean = false;
   mail : string = "";
   libroSeleccionado : string = "";
-  constructor(private apiservice: Servicio, private route: ActivatedRoute) {};
+  constructor(private apiservice: Servicio, private route: ActivatedRoute, private router: Router) {};
   yaLikeada : boolean = false;
   likes : number = 0;
   ingredientes : {nombre: string, cantidad: number}[] = [];
@@ -108,4 +111,14 @@ export class Receta {
     console.log("Obteniendo ingredientes")
     this.ingredientes = (await this.apiservice.obtenerIngredientesDeReceta(this.idReceta)).data;
   
-  }}
+  }
+
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
+
+  irAPaginaUsuario(){
+    this.router.navigate(['/usuario']);
+  }
+
+}
