@@ -14,10 +14,12 @@ import { Router } from '@angular/router';
 })
 export class PaginaPrincipalComponent {
   
-  
+  usuario: any;
   recetas: any[] = [];
+  recomendacionesKcal : any[] = [];
   recetaDestacada: any;
   pagina = 0;
+  paginaRec = 0;
   busqueda = "";
   filtro : string = "";
   recomendacionesKcal : any[] = [];
@@ -32,6 +34,18 @@ export class PaginaPrincipalComponent {
   constructor(private servicio: Servicio, @Inject(Router) private router : Router) {}
 
   async ngOnInit() {
+    
+    const mailResp = await this.servicio.obtenerMail()
+    this.mail = mailResp.data
+    this.consumos = (await this.servicio.obtenerConsumoUsuario(this.mail)).data
+    this.usuario = (await this.servicio.obtenerUsuario(this.mail)).data
+
+    this.reqCalorico = this.usuario.reqCalorico
+    this.caloriasRestantes = this.reqCalorico
+    
+    
+    this.calcularCalorias()
+    
     try {
       this.actualizarLista()
       const mailResp = await this.servicio.obtenerMail()
@@ -47,7 +61,7 @@ export class PaginaPrincipalComponent {
     this.obtenerRecetaDelDia()
     } catch (error) {
       console.error('Error cargando las recetas', error);
-    }
+    }  
   }
 
     async actualizarLista() {
