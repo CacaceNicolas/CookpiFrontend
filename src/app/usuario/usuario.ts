@@ -34,13 +34,9 @@ export class Usuario {
 
     const mailResp = await this.apiservice.obtenerMail()
     this.mail = mailResp.data
-    
     this.usuario = (await this.apiservice.obtenerUsuario(this.mail)).data
-
-    this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
-
+    await this.cargarConsumos();
     console.log(this.consumos);
-
     this.nombre = this.usuario.nombre
     this.descripcion = this.usuario.descripcion
     this.peso = this.usuario.peso
@@ -55,7 +51,7 @@ export class Usuario {
 
 
   calcularCalorias(){
-
+    this.caloriasRestantes = this.reqCalorico
     this.consumos.forEach((consumo) => {
       this.caloriasRestantes -= consumo.calorias * consumo.cantidad;
     });
