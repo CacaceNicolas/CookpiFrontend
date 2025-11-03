@@ -22,14 +22,13 @@ export class PaginaPrincipalComponent {
   paginaRec = 0;
   busqueda = "";
   filtro : string = "";
-  recomendacionesKcal : any[] = [];
   paginaRecomendaciones = 0;
   kcaloriasUsuario = 0;
-  usuario: any;
   mail : string = "";
   consumos: {calorias : number}[] =  [];
   recetaDelDia: {nombre : string, descripcion : string, tiempo : number, carbohidratos : number, proteinas : number, grasas : number, calorias : number}  = {nombre : "", descripcion : "", tiempo : 0, carbohidratos : 0, proteinas : 0, grasas : 0, calorias : 0};
-
+  reqCalorico : number = 0;
+  caloriasRestantes : number = 0;
 
   constructor(private servicio: Servicio, @Inject(Router) private router : Router) {}
 
