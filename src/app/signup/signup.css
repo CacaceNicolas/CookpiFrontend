@@ -59,6 +59,23 @@ input {
   font-size: 1rem;
 }
 
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
 .remember {
   display: flex;
   align-items: center;

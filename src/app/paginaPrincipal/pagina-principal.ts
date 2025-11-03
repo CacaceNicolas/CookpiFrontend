@@ -22,6 +22,9 @@ export class PaginaPrincipalComponent {
   paginaRec = 0;
   busqueda = "";
   filtro : string = "";
+
+  filtroActivo: string = '';
+
   paginaRecomendaciones = 0;
   kcaloriasUsuario = 0;
   mail : string = "";
@@ -128,6 +131,8 @@ export class PaginaPrincipalComponent {
   }
 
   cambiarFiltro(nuevoFiltro : string){
+
+    this.filtroActivo = nuevoFiltro;
     this.filtro = nuevoFiltro;
     this.actualizarLista();
 

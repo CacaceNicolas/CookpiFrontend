@@ -7,6 +7,7 @@ body {
 }
 
 .perfil-usuario {
+    font-family: "Poppins", sans-serif;
   max-width: 600px;
   margin: auto;
   background-color: #fffaf0;
@@ -17,8 +18,15 @@ body {
 
 header h1 {
   align-items: center;
-  color: #b9920f;
+  color: #000000;
   margin-bottom: 5px;
+}
+
+#consumismo {
+    justify-content: center;
+  align-items: center;
+  display: flex;
+  align-self: center;
 }
 
 .subtitulo {
@@ -33,7 +41,7 @@ header h1 {
 
 .datos-fisicos div {
   margin: 8px 0;
-  background-color: #f6f6c5;
+  background-color: #e6e6e6;
   padding: 8px;
   border-radius: 6px;
   color: #000000;
@@ -45,14 +53,17 @@ header h1 {
 }
 
 .consumo-item {
-  background-color: #fff7d0;
+  background-color: #f1f1f1;
   border-left: 6px solid #cc9c0b;
   padding: 10px;
   margin-bottom: 10px;
   border-radius: 8px;
 }
 
-.top-bar {
+.top-bar {position:fixed;
+  z-index: 1000;  
+  width: 96%;
+  top:0;
   background-color: #fff;
   padding: 0.8em 1em;
   display: flex;
@@ -60,7 +71,7 @@ header h1 {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1em;
-  position: relative; 
+
   margin-bottom: 3em;
 }
 
@@ -73,7 +84,7 @@ header h1 {
   width: 96%;
   height: 3px; 
 
-  background-color: #000000; 
+  background-color: #ddc700; 
   border-radius: 2px;
 }
 
@@ -134,5 +145,104 @@ header h1 {
 
 .home-icon:hover svg {
   stroke: #000;
+}
+
+
+
+
+button.primary {
+  background: linear-gradient(180deg,#2f7a5e,#27664e);
+  color: white;
+  border: none;
+}
+button.ghost {
+  background: transparent;
+
+}
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
+button {
+  align-self: center;
+  background-color: #ffffff;
+  color: #f0b800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.15em;
+  gap: 0.45em;
+  background-color: #ddd;
+  padding: 0.55em 0.85em;
+  border-radius: 0.7em;
+  border: none;
+
+
+
+  font-weight: 700;
+  font-size: 0.95em;
+  color: #000000;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+
+button.primary {
+  background: linear-gradient(180deg,#2f7a5e,#27664e);
+  color: white;
+  border: none;
+}
+button.ghost {
+  background: transparent;
+  border: 0.08em solid #e2e2e2;
+}
+
+body > button:nth-of-type(1),
+body > button:nth-of-type(2) {
+
+  width: 2em;
+  height: 2em;
+  padding: 0;
+  border-radius: 0.9em;
+  font-weight: 800;
+  font-size: 1.05em;
+  display: inline-grid;
+  place-items: center;
+  margin: 0 0.4em;
+  background: linear-gradient(180deg,#ffffff,#f1f1f1);
+  border: 0.06em solid #e6e6e6;
+}
+
+body > button:nth-of-type(1)::before {
+  content: "‹";
+  font-size: 1.2em;
+  color: #e2e2e2;
+}
+body > button:nth-of-type(2)::before {
+  content: "›";
+  font-size: 1.2em;
+  color: #e2e2e2;
+}
+
+body > button:nth-of-type(1),
+body > button:nth-of-type(2) {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
 }
 

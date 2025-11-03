@@ -28,5 +28,16 @@ export class CrearLibro {
       window.alert("El nombre no puede estar vacio");
     }
   }
-  
+
+
+  irAPaginaUsuario(){
+
+    this.router.navigate(['/usuario'])
+
+  }
+
+  irAPaginaPrincipal(){
+    this.router.navigate(['/'])
+  }
+
 }

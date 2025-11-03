@@ -10,7 +10,8 @@
 
 
 body {
-  font-family: sans-serif;
+  margin-top: 10em;
+  font-family: "Poppins", sans-serif;
   background-color: #f4f4f4;
   color: #333;
   line-height: 1.5;
@@ -18,6 +19,10 @@ body {
 }
 
 .top-bar {
+position:fixed;
+  z-index: 1000;  
+  width: 100%;
+  top:0;
   background-color: #fff;
   padding: 0.8em 1em;
   display: flex;
@@ -25,7 +30,7 @@ body {
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1em;
-  position: relative; 
+
   margin-bottom: 3em;
 }
 
@@ -38,9 +43,55 @@ body {
   width: 96%;
   height: 3px; 
 
-  background-color: #000000; 
+  background-color: #ddc700; 
   border-radius: 2px;
 }
+#logo-container {
+
+  align-self: center;
+
+  display: flex;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
+
+
+.categories{
+  margin-bottom: 2em;
+}
+.categories .category {
+  background: linear-gradient(180deg, #ffffff, #f5f5f5);
+  border: 1px solid #ddd;
+  border-radius: 0.6em;
+  padding: 0.5em 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+.category.active {
+
+  color: rgb(216, 195, 10);
+  border-color: #000000;
+}
+
+
+.categories .category:hover {
+  background: linear-gradient(180deg, #e6e6e6, #dcdcdc);
+}
+
+
 
 
 .user-icon {
@@ -49,6 +100,7 @@ body {
   border-radius: 50%;
   background-color: #f5f5f5; 
   display: flex;
+  margin-right: 3em;
   align-items: center;
   justify-content: center;
   cursor: pointer;
@@ -73,6 +125,7 @@ body {
 }
 
 .home-icon {
+  margin-left: 3em;
   width: 45px;
   height: 45px;
   border-radius: 50%;
@@ -102,8 +155,7 @@ body {
 }
 
 
-
-.top-bar input[type="search"] {
+input[type="search"] {
   -webkit-appearance: none;
   appearance: none;
   flex: 1 1 250px;           
@@ -118,7 +170,7 @@ body {
   color: #222;
   outline: none;
   transition: all 0.25s ease;
-  margin-bottom: 1em;
+
   background-repeat: no-repeat;
   background-position: 1.0em center;
   background-size: 1.2em 1.2em;
@@ -157,7 +209,7 @@ button {
 
 
   font-weight: 700;
-  font-size: 0.95em;
+  font-size: 1em;
   color: #222;
   cursor: pointer;
 
@@ -251,7 +303,7 @@ button:disabled {
 .categories {
   display: flex;
   overflow-x: auto;
-  background-color: #eee;
+
   padding: 1em;
   gap: 1em;
 }
@@ -266,6 +318,7 @@ button:disabled {
 }
 
 .featured {
+  
   display: flex;
   flex-direction: column;
   padding: 1em;
@@ -274,19 +327,21 @@ button:disabled {
 }
 
 .featured-image {
-  background-color: #ddd;
+  background-color: #b4b4b4;
   height: 12.5em; /* 200px */
   margin-bottom: 1em;
   border-radius: 0.5em;
 }
 
 .featured-text h2 {
-  font-size: 1em;
-  margin-bottom: 0.5em;
+  color: #000000;
+  font-size: 2.2em;
+
 }
 
 .featured-text h3 {
-  font-size: 1.5em;
+    color: #000000;
+  font-size: 2em;
   margin-bottom: 0.5em;
 }
 
@@ -300,71 +355,50 @@ button:disabled {
 }
 
 .recomendaciones h3 {
-  font-size: 1.2em;
+  color:#000;
+  font-size: 2em;
   margin-bottom: 0.5em;
 }
 
 .cards {
   display: flex;
-  gap: 1em;
+  gap: 2em;
   overflow-x: auto;
   margin-top: 1em;
 }
 
 .card {
-  background-color: #fff;
+  
+  background-color: #f7f6f1;
   padding: 0.5em;
   border-radius: 0.5em;
   min-width: 9.5em;
   box-shadow: 0 0.125em 0.25em rgba(0,0,0,0.1);
-  font-size: 0.9em;
+  font-size: 0.95em;
 }
 
+.card h4{
+  
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+.card h4:hover {
+  color: rgb(216, 195, 10);
+}
 .card-img {
   height: 6.25em; /* 100px */
-  background-color: #ddd;
+  background-color: #969696;
   border-radius: 0.5em;
   margin-bottom: 0.5em;
 }
 
 .tags {
-  font-size: 0.75em;
-  color: #777;
-}
-
-.tendencias {
-  background-color: #ddd;
-  padding: 1em;
-}
-
-.tendencias h3 {
-  font-size: 1.2em;
-}
-
-.trend-list {
-  display: flex;
-  gap: 1em;
-  overflow-x: auto;
-  margin-top: 1em;
-}
-
-.trend {
-  background-color: #fff;
-  padding: 0.5em;
-  border-radius: 0.5em;
-  min-width: 8em;
-  font-size: 0.9em;
-}
-
-.trend-img {
-  height: 5em;
-  background-color: #bbb;
-  margin-bottom: 0.5em;
-  border-radius: 0.4em;
+  font-size: 0.5em;
+  color: #fff7d0;
 }
 
 .tag {
-  font-size: 0.75em;
+  font-size: 0.5em;
   background-color: #ccc;
   padding: 0.2em 0.5em;
   border-radius: 0.3em;

@@ -25,18 +25,12 @@
       </svg>
 
     </div>
-    <input type="search" #busquedaInput placeholder="Buscar receta..." (keydown.enter)="buscar(busquedaInput.value)">
+    <div (click)="irAPaginaPrincipal()">
+      <img id= "logo-container"src="logoCookpi.png"  alt="Logo">
+    </div>
+    
 
-    <nav class="categories">
-
-
-
-    <button (click) = "cambiarFiltro('Vegetariana')" class="category">Vegetariana</button>
-    <button (click) = "cambiarFiltro('Keto')" class="category">Keto</button>
-    <button (click) = "cambiarFiltro('No dieta')" class="category">No dieta</button> 
-    <button (click) = "cambiarFiltro('No-Carbs')" class="category">No carbs</button>
-    <button (click) = "cambiarFiltro('High-Prote')" class="category">High protein</button>
-    <button (click) = "cambiarFiltro('')" class="category">X</button>
+   
   
     <div class="user-icon" (click)="irAPaginaUsuario()">
 
@@ -52,15 +46,55 @@
       <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
     </svg>
     </div>
-
-    
-
-  
-  </nav>
-
-
-
   </header>
+
+  <nav class="categories">
+        <input type="search" #busquedaInput placeholder="Buscar receta..." (keydown.enter)="buscar(busquedaInput.value)">
+
+
+    <button 
+  (click)="cambiarFiltro('Vegetariana')" 
+  [class.active]="filtroActivo === 'Vegetariana'" 
+  class="category">
+  Vegetariana
+</button>
+
+<button 
+  (click)="cambiarFiltro('Keto')" 
+  [class.active]="filtroActivo === 'Keto'" 
+  class="category">
+  Keto
+</button>
+
+<button 
+  (click)="cambiarFiltro('No dieta')" 
+  [class.active]="filtroActivo === 'No dieta'" 
+  class="category">
+  No dieta
+</button>
+
+<button 
+  (click)="cambiarFiltro('No-Carbs')" 
+  [class.active]="filtroActivo === 'No-Carbs'" 
+  class="category">
+  No carbs
+</button>
+
+<button 
+  (click)="cambiarFiltro('High-Prote')" 
+  [class.active]="filtroActivo === 'High-Prote'" 
+  class="category">
+  High protein
+</button>
+
+<button 
+  (click)="cambiarFiltro('')" 
+  [class.active]="filtroActivo === ''" 
+  class="category">
+  X
+</button>
+
+  </nav>
 <section class="recomendaciones">
   <h3>Recomendaciones para vos...</h3>
  <div class="cards">
@@ -78,19 +112,17 @@
   </div>
 </div>
 
-
-  
-    <button (click) = "restarPagina()"></button>
-    <button (click) = "sumarPagina()"></button>
+    <button (click) = "restarPagina()"><</button>
+    <button (click) = "sumarPagina()">></button>
 
 </section>
   
-  <section class="featured" *ngIf="recetaDelDia">
+<section class="featured" *ngIf="recetaDelDia">
   <div class="featured-image"></div>
   <div class="featured-text">
     <h2>Receta del día</h2>
     <h3>{{ recetaDelDia.nombre }}</h3>
-    <p class="tiempo">{{ recetaDelDia.tiempo || 'tiempo estimado' }}</p>
+    <p class="tiempo"> Tiempo prep: {{ recetaDelDia.tiempo || 'tiempo estimado' }}</p>
     <p class="descripcion">
       Calorías: {{ recetaDelDia.calorias }}<br>
       Proteínas: {{ recetaDelDia.proteinas }}<br>
@@ -104,21 +136,23 @@
 <section class="recomendaciones">
   <h3>Según tu consumo...</h3>
 
-  <button (click) = "restarPaginaRec()"><</button>
+
 
   <div class="cards">
 
-    <div class="card"  *ngFor="let receta of recomendacionesKcal">
+    <div class="card"  *ngFor="let receta of recomendacionesKcal" (click) = "verReceta(receta.id)">
 
       <div class="card-img"></div>
-      <h4>{{ receta.nombre }}</h4>
+      <h4 (click) = "verReceta(receta.id)" >{{ receta.nombre }}</h4>
       <p>Calorías: {{ receta.calorias }}</p>
       <p>Proteínas: {{ receta.proteinas }}</p>
       <p>Grasas: {{ receta.grasas }}</p>
       <p>Carbohidratos: {{ receta.carbohidratos }}</p>
       <button (click) = "verReceta(receta.id)">Ver</button>
+
     </div>
   </div>
+<button (click) = "restarPaginaRec()"><</button>
 <button (click) = "sumarPaginaRec()">></button>
  
 </section>
