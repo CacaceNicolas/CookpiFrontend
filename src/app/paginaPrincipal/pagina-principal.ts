@@ -152,4 +152,9 @@ export class PaginaPrincipalComponent {
   irAPaginaUsuario(){
     this.router.navigate(['/usuario']);
   }
+
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
+
 }

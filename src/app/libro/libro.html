@@ -1,4 +1,45 @@
+
+  <header class="top-bar">
+
+    <div class="home-icon" (click)="irAPaginaPrincipal()">
+      <svg xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        width="24"
+        height="24">
+        <path d="M3 9.5L12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5z"/>
+      </svg>
+
+    </div>
+
+    <nav class="categories">
+  
+    <div class="user-icon" (click)="irAPaginaUsuario()">
+
+    <svg xmlns="http://www.w3.org/2000/svg" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        stroke-width="2" 
+        stroke-linecap="round" 
+        stroke-linejoin="round">
+      <path d="M20 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M4 21v-2a4 4 0 0 1 3-3.87"/>
+      <path d="M16 7a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z"/>
+    </svg>
+    </div>
+
+ </nav>
+</header>
 <div class="libro-page">
+
+
+
+
   <header class="libro-header">
     <h1 class="libro-title">{{ nombre }}</h1>
     <p class="libro-descripcion">{{ descripcion }}</p>
