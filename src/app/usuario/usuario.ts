@@ -35,7 +35,7 @@ export class Usuario {
     const mailResp = await this.apiservice.obtenerMail()
     this.mail = mailResp.data
     this.usuario = (await this.apiservice.obtenerUsuario(this.mail)).data
-    await this.cargarConsumos();
+    await this.actualizarInfo();
     console.log(this.consumos);
     this.nombre = this.usuario.nombre
     this.descripcion = this.usuario.descripcion
