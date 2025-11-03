@@ -268,11 +268,9 @@ export class Servicio {
     return await axios.get(`${this.url}/receta/del/dia`);
   }
 
-
   async eliminarRecetaDelLibro(idLibro : string, idReceta : string){
     return await axios.delete(`${this.url}/libro/eliminarReceta/` + idLibro + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
-
 
   async eliminarLibro(idLibro : string){ 
     return await axios.delete(`${this.url}/libro/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});

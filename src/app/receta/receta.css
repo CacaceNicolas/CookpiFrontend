@@ -5,12 +5,13 @@
 .receta-page {
   background: #efefef;
   padding: 1em;
+  
   max-width: 26em;
   margin: auto;
+  margin-top: 10em;
   font-family: "Poppins", sans-serif;
 }
 
-/* Placeholder imagen */
 .imagen-placeholder {
   width: 100%;
   height: 12em;
@@ -21,7 +22,7 @@
 }
 
 
-/* Nombre receta */
+
 .nombre-seccion {
   margin-bottom: 1em;
 }
@@ -35,7 +36,6 @@
   border-radius: 0.4em;
 }
 
-/* Info adicional */
 .info-extra {
   font-size: 0.9em;
   margin-bottom: 1.5em;
@@ -48,7 +48,6 @@
   margin-left: 0.3em;
 }
 
-/* Ingredientes */
 .ingredientes {
   background: #cfcfcf;
   padding: 1em;
@@ -83,7 +82,7 @@
   font-size: 0.9em;
 }
 
-/* Texto */
+
 .subtitulo {
   margin-top: 1.2em;
   font-weight: bold;
@@ -95,7 +94,7 @@
   min-height: 5em;
 }
 
-/* Agregar a libro */
+
 .acciones {
   margin-top: 1.5em;
   display: flex;
@@ -108,9 +107,26 @@
   border: 1px solid #ccc;
   font-size: 1em;
 }
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
 .btn-agregar {
-  background: #2f7a5e;
-  color: white;
+  background: #cec000;
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 0.5em;
   padding: 0.7em;
@@ -118,7 +134,7 @@
   cursor: pointer;
 }
 
-/* Footer */
+
 .footer {
   text-align: center;
   margin-top: 1.5em;
@@ -126,7 +142,7 @@
   color: #555;
 }
 
-/* 📱 Responsive */
+
 @media (min-width: 40em) {
   .receta-page {
     max-width: 35em;
@@ -150,6 +166,10 @@
 
 
 .top-bar {
+  position:fixed;
+  z-index: 1000;  
+  width: 96%;
+  top:0;
   background-color: #fff;
   padding: 0.8em 1em;
   display: flex;
@@ -157,7 +177,7 @@
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1em;
-  position: relative; 
+
   margin-bottom: 3em;
 }
 
@@ -170,7 +190,7 @@
   width: 96%;
   height: 3px; 
 
-  background-color: #000000; 
+  background-color: #ddc700; 
   border-radius: 2px;
 }
 

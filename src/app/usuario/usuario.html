@@ -14,6 +14,10 @@
       </svg>
 
     </div>
+
+
+    <img id= "logo-container" (click)="irAPaginaPrincipal()" src="logoCookpi.png" alt="Logo">
+
     <nav class="categories">
     <div class="user-icon" (click)="irAPaginaUsuario()">
 
@@ -52,20 +56,25 @@
   <section class="consumos">
     <h2>Consumos del día...</h2>
     <ul>
-      <li *ngFor="let item of consumos" class="consumo-item">
+      
+      <div id = "consumismo " *ngFor="let item of consumos" >
+      <li class="consumo-item">
         <h3>{{item.nombre}}</h3>
         <p><strong>Momento del día:</strong> {{item.momentoDelDia}}</p>
         <p><strong>Calorías:</strong> {{item.calorias}} kcal</p>
         <p>{{item.cantidad}}</p>
-        <button (click)="borrarConsumo(item.id)"><</button>
-        <button (click)="agregarConsumo(item.id)">></button>
+
       </li>
+      <button (click)="borrarConsumo(item.id)">-</button>
+      <button (click)="agregarConsumo(item.id)">+</button>
+      </div>
+    
     </ul>
   </section>
   <section class="consumos">
     <h2>Libros</h2>
     <ul>
-    <li *ngFor="let item of libros" >
+    <li *ngFor="let item of libros"  class="consumo-item">
       <div (click)="verLibro(item.id)"> 
       <h3>{{item.nombre}}</h3>
       <p>{{item.descripcion}}</p>
@@ -74,6 +83,8 @@
     </li>
     </ul>
     <button (click)="crearLibro()">Crear Libro</button>
+    <button (click)="crearReceta()">Crear Receta</button>
+    <button (click)="cerrarSesion()">Cerrar Sesión</button>
   </section>
 
 
