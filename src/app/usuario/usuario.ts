@@ -117,4 +117,12 @@ export class Usuario {
   }
 
 
+  crearReceta(){
+    this.router.navigate(['/crearReceta']);
+  }
+
+  cerrarSesion(){
+    localStorage.removeItem("jwt");
+    this.router.navigate(['/']);
+  }
 }

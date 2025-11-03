@@ -96,4 +96,14 @@ else{
     }
     return true;
   }
+
+
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
+
+  irAPaginaUsuario(){
+    this.router.navigate(['/usuario']);
+  }
+
 }
