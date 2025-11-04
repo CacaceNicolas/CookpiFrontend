@@ -38,15 +38,11 @@
 
 <div class="receta-page">
 
-  <!-- Placeholder imagen -->
-  <div class="imagen-placeholder">
-    <div class="cruz"></div>
-    <div class="cruz cruz2"></div>
-  </div>
 
-  <!-- Nombre -->
+
+
   <div class="nombre-seccion">
-    <h2 class="titulo">NOMBRE RECETA:</h2>
+
     <p class="valor">{{ nombre }}</p>
   </div>
 
@@ -62,7 +58,7 @@
   <div class="ingredientes">
     <div class="ingredientes-header">
       <div class="ovales">
-        <span *ngFor="let i of [1,2,3,4,5,6]" class="oval"></span>
+        <span *ngFor="let i of [1,2,3,4,5,6,7,8,9]" class="oval"></span>
       </div>
       <h3>INGREDIENTES</h3>
     </div>
@@ -78,7 +74,7 @@
     <div class="ingredientes">
     <div class="ingredientes-header">
       <div class="ovales">
-        <span *ngFor="let i of [1,2,3,4,5,6]" class="oval"></span>
+        <span *ngFor="let i of [1,2,3,4,5,6,7,8,9]" class="oval"></span>
       </div>
       <h3>INFORMACIÓN NUTRICIONAL</h3>
     </div>
@@ -93,19 +89,40 @@
 
 
 
-  <!-- Descripción -->
+
   <h3 class="subtitulo">Descripción:</h3>
   <p class="texto">{{ descripcion }}</p>
   
-  <!-- Likes -->
-  <h3 class="subtitulo">Likes:</h3>
-  <p class="texto">{{ likes }}</p>
+  <div class="likes-row">
 
-  <!-- Procedimiento -->
+  <div class="likes-info">
+    <span class="likes-count">{{ likes }}</span>
+  <svg  *ngIf="yaLikeada"
+      xmlns="http://www.w3.org/2000/svg" 
+      width="32" height="32" viewBox="0 0 24 24" 
+      fill="currentColor" class="icon-thumb">
+    <path d="M2 10a1 1 0 0 1 1-1h3v10H3a1 1 0 0 1-1-1V10Zm7-2.24 3.12-4.73A1 1 0 0 1 13 3a1 1 0 0 1 .9.55l1.42 2.83H20a2 2 0 0 1 1.95 2.43l-2 8A2 2 0 0 1 18 18H9V7.76Z"/>
+  </svg>
+
+
+  <svg (click)="like()" *ngIf="!yaLikeada"
+      xmlns="http://www.w3.org/2000/svg" 
+      width="32" height="32" viewBox="0 0 24 24" 
+      fill="none" stroke="currentColor" stroke-width="2" 
+      stroke-linecap="round" stroke-linejoin="round" 
+      class="icon-thumb">
+    <path d="M7 10v12" />
+    <path d="M15 5.88 13.17 10H21a1 1 0 0 1 .96 1.27l-2 7A2 2 0 0 1 18 20h-7a2 2 0 0 1-2-2v-8l3.34-5.57A1 1 0 0 1 14.17 4a1 1 0 0 1 .83 1.88Z" />
+  </svg>
+
+  </div>
+</div>
+
+  
   <h3 class="subtitulo">Procedimiento:</h3>
   <p class="texto">{{ procedimiento }}</p>
 
-  <!-- Agregar a libro -->
+  
   <div class="acciones">
     <select [(ngModel)]="libroSeleccionado" class="selector-libro">
       <option value="">Seleccionar libro...</option>
@@ -117,14 +134,10 @@
     <button class="btn-agregar" (click)="agregarALibro()">
        Agregar a libro
     </button>
+
     <button class="btn-agregar" (click)="agregarConsumo()">
        Agregar consumo
     </button>
-    <button class="btn-agregar" (click)="like()">
-       Like
-    </button>
-    
-
 
   </div>
 

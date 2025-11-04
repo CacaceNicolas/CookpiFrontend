@@ -3,22 +3,13 @@
 }
 
 .receta-page {
-  background: #efefef;
+
   padding: 1em;
   
   max-width: 26em;
   margin: auto;
   margin-top: 10em;
   font-family: "Poppins", sans-serif;
-}
-
-.imagen-placeholder {
-  width: 100%;
-  height: 12em;
-  background: #d4d4d4;
-  border-radius: 0.5em;
-  position: relative;
-  margin-bottom: 1em;
 }
 
 
@@ -31,9 +22,9 @@
   font-weight: bold;
 }
 .valor {
-  background: #ddd;
-  padding: 0.5em;
-  border-radius: 0.4em;
+  font-weight: bolder;
+  margin-top: 0.3em;
+  margin-bottom: 1.3em;
 }
 
 .info-extra {
@@ -65,7 +56,9 @@
 }
 .oval {
   width: 1.4em;
-  height: 0.7em;
+  height: 1.4em;
+  margin-bottom: 01em;
+  margin-right: 0.5em;
   background: #eaeaea;
   border-radius: 1em;
 }
@@ -98,12 +91,13 @@
 .acciones {
   margin-top: 1.5em;
   display: flex;
+   padding: 0.6em;
   flex-direction: column;
   gap: 0.6em;
 }
 .selector-libro {
   padding: 0.6em;
-  border-radius: 0.5em;
+  border-radius: 1em;
   border: 1px solid #ccc;
   font-size: 1em;
 }
@@ -123,15 +117,6 @@
     max-height: 50px;      
     margin: 0.5rem auto;
   }
-}
-.btn-agregar {
-  background: #cec000;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 0.5em;
-  padding: 0.7em;
-  font-size: 1em;
-  cursor: pointer;
 }
 
 
@@ -194,18 +179,18 @@
   border-radius: 2px;
 }
 
-
 .user-icon {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #f5f5f5; 
+
   display: flex;
+  margin-right: 3em;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #ddd;
+
 }
 
 .user-icon svg {
@@ -225,16 +210,21 @@
 }
 
 .home-icon {
+  margin-left: 3em;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #f5f5f5; 
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #ddd;
+
+}
+.valor{
+  font-size: 2em;
+  text-align: center;
 }
 
 .home-icon svg {
@@ -251,4 +241,98 @@
 
 .home-icon:hover svg {
   stroke: #000;
+}
+
+button {
+  display: flex;
+  align-self: center;
+  align-content: center;
+
+  justify-content: center;
+  gap: 0.9em;
+  padding: 0.3em 0.7em;
+  border-radius: 1.5em;
+  margin-top: 0.5em;
+  border: 0.1em solid #cfb002;
+
+  font-weight: 700;
+  font-size: 1.1em;
+  color: #cfb002;
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:hover{
+  color: white;
+  background-color: #cfb002;
+  transition: ease 0.5s;
+}
+
+
+
+.likes-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin:12px 0;
+}
+
+
+.like-btn{
+  --size:40px;
+  width:var(--size);
+  height:var(--size);
+  padding:6px;
+  border-radius:10px;
+  border:none;
+  background:transparent;
+  cursor:pointer;
+  display:inline-grid;
+  place-items:center;
+  transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+  box-shadow: 0 6px 18px rgba(2,6,23,0.06);
+  outline: none;
+}
+
+.like-btn:focus{
+  box-shadow: 0 0 0 5px rgba(43,138,239,0.12);
+}
+
+.like-icon{
+  width:22px;
+  height:22px;
+  transition: transform .28s cubic-bezier(.2,.9,.3,1), filter .2s;
+  display:block;
+}
+
+
+.like-icon .stroke{ stroke:#94a3b8; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round; transition: stroke .16s ease; }
+.like-icon .fill{ fill:none; transition: fill .16s ease; }
+
+
+.like-btn.liked{
+  transform: translateY(-4px) scale(1.02);
+  background: linear-gradient(180deg, rgba(255,77,109,0.12), rgba(255,77,109,0.06));
+  box-shadow: 0 10px 30px rgba(255,77,109,0.12);
+}
+.like-btn.liked .like-icon{
+  transform: scale(1.1) rotate(-6deg);
+  filter: drop-shadow(0 6px 14px rgba(255,77,109,0.28));
+}
+.like-btn.liked .fill{ fill:#ff4d6d; }
+.like-btn.liked .stroke{ stroke:#fff; }
+
+.likes-info{
+  display:flex;
+  flex-direction:column;
+  line-height:1;
+}
+.likes-count{
+  font-weight:700;
+  font-size:16px;
+}
+.likes-label{
+  font-size:12px;
+  color:#666;
 }

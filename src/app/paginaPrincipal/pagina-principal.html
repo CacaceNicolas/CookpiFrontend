@@ -67,8 +67,8 @@
 </button>
 
 <button 
-  (click)="cambiarFiltro('No dieta')" 
-  [class.active]="filtroActivo === 'No dieta'" 
+  (click)="cambiarFiltro('No-dieta')" 
+  [class.active]="filtroActivo === 'No-dieta'" 
   class="category">
   No dieta
 </button>
@@ -97,7 +97,7 @@
   </nav>
 <section class="recomendaciones">
   <h3>Recomendaciones para vos...</h3>
- <div class="cards">
+  <div class="cards">
 
     <div class="card" *ngFor="let item of recetas">
 
@@ -108,17 +108,18 @@
       <p>Proteínas: {{ item.proteinas }}</p>
       <p>Grasas: {{ item.grasas }}</p>
       <p>Carbohidratos: {{ item.carbohidratos }}</p>
+      <p id="dieta">{{item.dieta}}</p>
       <button (click) = "verReceta(item.id)">Ver</button>
   </div>
 </div>
-
+  <div class="contenedorBotones">
     <button (click) = "restarPagina()"><</button>
     <button (click) = "sumarPagina()">></button>
-
+  </div>
 </section>
   
 <section class="featured" *ngIf="recetaDelDia">
-  <div class="featured-image"></div>
+  <div class="featured-image"> <img src="cooking.png"> </div>
   <div class="featured-text">
     <h2>Receta del día</h2>
     <h3>{{ recetaDelDia.nombre }}</h3>
@@ -152,9 +153,11 @@
 
     </div>
   </div>
-<button (click) = "restarPaginaRec()"><</button>
-<button (click) = "sumarPaginaRec()">></button>
- 
+
+<div class="contenedorBotones">
+  <button (click) = "restarPaginaRec()"><</button>
+  <button (click) = "sumarPaginaRec()">></button>
+</div>
 </section>
 
 

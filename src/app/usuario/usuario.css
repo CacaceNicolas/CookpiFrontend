@@ -10,6 +10,7 @@ body {
     font-family: "Poppins", sans-serif;
   max-width: 600px;
   margin: auto;
+  margin-top: 8em;
   background-color: #fffaf0;
   padding: 20px;
   border-radius: 12px;
@@ -88,18 +89,18 @@ header h1 {
   border-radius: 2px;
 }
 
-
 .user-icon {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #f5f5f5; 
+
   display: flex;
+  margin-right: 3em;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #ddd;
+
 }
 
 .user-icon svg {
@@ -119,18 +120,18 @@ header h1 {
 }
 
 .home-icon {
+  margin-left: 3em;
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  background-color: #f5f5f5; 
+
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: 2px solid #ddd;
-}
 
+}
 .home-icon svg {
   width: 22px;
   height: 22px;
