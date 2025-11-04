@@ -1,7 +1,8 @@
 body {
   font-family: Arial, sans-serif;
-  background-color: #d9d9d9;
+
   margin: 0;
+  margin-top: 8em;
   padding: 0;
   text-align: center;
 }
@@ -23,13 +24,54 @@ body {
   }
 }
 
-header {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid #000;
+
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
 }
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
+
+.top-bar {
+position:fixed;
+  z-index: 1000;  
+  width: 96%;
+  top:0;
+  background-color: #fff;
+  padding: 0.8em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+
+  margin-bottom: 3em;
+}
+
+.top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 96%;
+  height: 3px; 
+
+  background-color: #ddc700; 
+  border-radius: 2px;
+}
+
 
 .icon {
   width: 20px;
@@ -43,8 +85,8 @@ main {
 }
 
 h1 {
-  text-align: left;
-  margin-bottom: 30px;
+  text-align: center;
+  margin-bottom: 2em;
   font-size: 28px;
 }
 
@@ -82,10 +124,14 @@ input[type="password"] {
 
 button {
   padding: 10px 20px;
-  border: none;
-  background-color: black;
-  color: white;
+  border-style: solid;
+
+  color: #c7a302; 
+  font-weight: bolder;
+  margin-right:1em;
   border-radius: 20px;
+  
+  border-color: #c7a302; ;
   cursor: pointer;
 }
 

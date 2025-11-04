@@ -6,11 +6,13 @@
   <title>Login</title>
   <link rel="stylesheet" href="signup.css">
 </head>
+<header class="top-bar">
+
+    <img id= "logo-container" (click)="irAPaginaPrincipal()" src="logoCookpi.png" alt="Logo">
+
+</header>
 <body>
-  <header>
-    <img src="lupa.png" alt="Buscar" class="icon" />
-    <img src="cerrar.png" alt="Cerrar" class="icon" />
-  </header>
+
 
   <main>
     <h1>Crear cuenta</h1>
@@ -29,11 +31,14 @@
     </form>
 
 
+
+    <section class="perfil-form">    
+      
     <div class="mensaje">
-      Cargá tu perfil para recibir <br> recomendaciones
+      <h3> Cargá tu perfil para recibi
+         recomendaciones </h3>
     </div>
 
-    <section class="perfil-form">
       <form>
         <label for="peso">Peso En Kilos</label>
         <input [formControl] = "peso" type="number" id="peso" name="peso">

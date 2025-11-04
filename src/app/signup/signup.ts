@@ -58,5 +58,9 @@ export class Signup {
     }
   }
 
+  irAPaginaPrincipal(){
+    this.router.navigate(['/signup']);
+  }
+
 
 }

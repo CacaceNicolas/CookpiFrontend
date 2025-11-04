@@ -40,18 +40,11 @@ export class Receta {
   async ngOnInit() {
     try {
       this.idReceta = this.route.snapshot.paramMap.get('id') || '';
-      const resp = await this.apiservice.obtenerReceta(this.idReceta);
+      
       const mailResp = await this.apiservice.obtenerMail()
       this.mail = mailResp.data
       console.log(mailResp)
-      this.procedimiento = resp.data.procedimiento;
-      this.descripcion = resp.data.descripcion;
-      this.nombre = resp.data.nombre;
-      this.calorias = resp.data.calorias;
-      this.carbohidratos = resp.data.carbohidratos;
-      this.proteinas = resp.data.proteinas;
-      this.grasas = resp.data.grasas;
-      this.likes = resp.data.cantLikes;
+      this.actualizar()
       console.log(this.mail);
       this.isYaLikeada();
       this.obtenerIngredientes();
@@ -77,28 +70,37 @@ export class Receta {
   } 
 
   async agregarALibro(){  
-
     this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
-    
   }
 
   async agregarConsumo(){
-
     this.apiservice.agregarConsumo(+this.idReceta, this.mail)
-    
-
-
   }
 
 
   async like(){
-    console.log("sL")
-    console.log(this.yaLikeada)
     if (!this.yaLikeada){
       this.apiservice.like(+this.idReceta, this.mail);
+      this.yaLikeada = true;
+      this.actualizar()
     }
 
   }
+
+  async actualizar(){
+    
+    const resp = await this.apiservice.obtenerReceta(this.idReceta);
+    this.procedimiento = resp.data.procedimiento;
+    this.descripcion = resp.data.descripcion;
+    this.nombre = resp.data.nombre;
+    this.calorias = resp.data.calorias;
+    this.carbohidratos = resp.data.carbohidratos;
+    this.proteinas = resp.data.proteinas;
+    this.grasas = resp.data.grasas;
+    this.likes = resp.data.cantLikes;
+    console.log(this.likes)
+  }
+
 
   async isYaLikeada(){
     

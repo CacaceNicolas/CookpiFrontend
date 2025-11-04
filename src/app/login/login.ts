@@ -41,5 +41,10 @@ export class Login {
       window.alert('Por favor, complete todos los campos.');
     }
   }
+  
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
+
 
 }
