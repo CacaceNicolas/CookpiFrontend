@@ -54,11 +54,13 @@ export class Receta {
 
 
     try {
+      
       const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
       console.log(resp);
       console.log("Longitud: " + resp.length)
+      
       for (let i = 0; i < resp.length; i++) {
-      this.libros.push({id : resp[i].id,nombre: resp[i].nombre})
+        this.libros.push({id : resp[i].id,nombre: resp[i].nombre})
       }
 
       console.log(this.libros)
@@ -79,16 +81,34 @@ export class Receta {
 
 
   async like(){
-    if (!this.yaLikeada){
-      this.apiservice.like(+this.idReceta, this.mail);
-      this.yaLikeada = true;
-      this.actualizar()
+    if (!this.yaLikeada) {
+    this.yaLikeada = true;
+    this.likes = (this.likes || 0) + 1;
+    try {
+      await this.apiservice.like(+this.idReceta, this.mail);
+
+    } catch (err) {
+
+      this.yaLikeada = false;
+      this.likes =  this.likes - 1;
+      console.error("No se pudo likear:", err);
     }
+  } else {
+    this.yaLikeada = false;
+    this.likes = ((this.likes || 1) - 1);
+    try {
+      await this.apiservice.eliminarLike(+this.idReceta, this.mail);
+    } catch (err) {
+
+      this.yaLikeada = true;
+      this.likes = (this.likes || 0) + 1;
+      console.error("No se pudo eliminar like:", err);
+    }
+  }
 
   }
 
   async actualizar(){
-    
     const resp = await this.apiservice.obtenerReceta(this.idReceta);
     this.procedimiento = resp.data.procedimiento;
     this.descripcion = resp.data.descripcion;
@@ -101,18 +121,14 @@ export class Receta {
     console.log(this.likes)
   }
 
-
   async isYaLikeada(){
     
     this.yaLikeada = (await this.apiservice.yaLikeada(+this.idReceta, this.mail)).data
   }
 
-
-
   async obtenerIngredientes(){
     console.log("Obteniendo ingredientes")
     this.ingredientes = (await this.apiservice.obtenerIngredientesDeReceta(this.idReceta)).data;
-  
   }
 
   irAPaginaPrincipal(){

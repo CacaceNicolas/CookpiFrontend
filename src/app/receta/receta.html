@@ -40,7 +40,6 @@
 
 
 
-
   <div class="nombre-seccion">
 
     <p class="valor">{{ nombre }}</p>
@@ -97,13 +96,15 @@
 
   <div class="likes-info">
     <span class="likes-count">{{ likes }}</span>
-  <svg  *ngIf="yaLikeada"
+  
+  
+  
+    <svg (click)="like()" *ngIf="yaLikeada"
       xmlns="http://www.w3.org/2000/svg" 
       width="32" height="32" viewBox="0 0 24 24" 
       fill="currentColor" class="icon-thumb">
     <path d="M2 10a1 1 0 0 1 1-1h3v10H3a1 1 0 0 1-1-1V10Zm7-2.24 3.12-4.73A1 1 0 0 1 13 3a1 1 0 0 1 .9.55l1.42 2.83H20a2 2 0 0 1 1.95 2.43l-2 8A2 2 0 0 1 18 18H9V7.76Z"/>
   </svg>
-
 
   <svg (click)="like()" *ngIf="!yaLikeada"
       xmlns="http://www.w3.org/2000/svg" 
