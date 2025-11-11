@@ -276,6 +276,8 @@ export class Servicio {
     return await axios.delete(`${this.url}/libro/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
-
+  async eliminarLike(idReceta : number, mail : string){
+    return await axios.delete(this.url + "/usuario/like/" + idReceta + "/" + mail, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
+  }
 
 }
