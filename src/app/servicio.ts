@@ -8,7 +8,7 @@ import axios from 'axios';
 export class Servicio {
   constructor() {}
 
-  url : string = "http://localhost:3000"
+  url : string = "https://cookpibackend.policloudservices.ipm.edu.ar/"
 
   async agregarIngrediente(nombre: string, calorias: number, proteinas: number, grasas: number, carbohidratos: number) {
     axios.post(`${this.url}/ingrediente`, {
@@ -171,7 +171,7 @@ export class Servicio {
   }
 
   enviarCorreoPassword(mail: string) {
-    return axios.post('http://localhost:3000/recuperarPassword/', {mail: mail})
+    return axios.post(this.url + '/recuperarPassword/', {mail: mail})
       .then(response => response.data)
       .catch(error => {
         console.error('Error al enviar el correo:', error);

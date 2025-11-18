@@ -33,8 +33,8 @@ export class Receta {
   carbohidratos : number = 0;
   proteinas : number = 0;
   grasas : number = 0;
-
-
+  mailCreador : string = "";
+  
 
 
   async ngOnInit() {
@@ -51,7 +51,6 @@ export class Receta {
     } catch (error) {
       console.error("Error al obtener la receta:", error);
     }
-
 
     try {
       
@@ -105,12 +104,12 @@ export class Receta {
       console.error("No se pudo eliminar like:", err);
     }
   }
-
   }
 
   async actualizar(){
     const resp = await this.apiservice.obtenerReceta(this.idReceta);
     this.procedimiento = resp.data.procedimiento;
+    this.mailCreador = resp.data.
     this.descripcion = resp.data.descripcion;
     this.nombre = resp.data.nombre;
     this.calorias = resp.data.calorias;
@@ -118,8 +117,11 @@ export class Receta {
     this.proteinas = resp.data.proteinas;
     this.grasas = resp.data.grasas;
     this.likes = resp.data.cantLikes;
-    console.log(this.likes)
   }
+
+
+
+
 
   async isYaLikeada(){
     
@@ -138,5 +140,6 @@ export class Receta {
   irAPaginaUsuario(){
     this.router.navigate(['/usuario']);
   }
+
 
 }
