@@ -17,25 +17,24 @@ export class Servicio {
         proteinas: proteinas,
         grasas: grasas,
         carbohidratos: carbohidratos,
-        token : localStorage.getItem("jwt")
-    });
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
    
   async obtenerRecetas(pagina : number, busqueda : string, buscar : boolean, filtro : string){
     if (buscar){
       if(filtro == ""){
-        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda);
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       }
       else{
-        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda + `/` + filtro);
+        return await axios.get(`${this.url}/receta/pag/` + pagina + `/` + busqueda + `/` + filtro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       }
     }
     else{
       if (filtro == ""){
-        return await axios.get(`${this.url}/receta/pag/` + pagina);
+        return await axios.get(`${this.url}/receta/pag/` + pagina, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       }
       else{
-        return await axios.get(`${this.url}/receta/pagf/` + pagina + `/` + filtro); 
+        return await axios.get(`${this.url}/receta/pagf/` + pagina + `/` + filtro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}}); 
       }
     }
   }
@@ -50,8 +49,6 @@ export class Servicio {
         cantLikes : 0,
         tiempo : tiempo,
         dieta : dieta,
-
-        token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
@@ -59,12 +56,11 @@ export class Servicio {
     return axios.post(`${this.url}/libro`, {
         nombre: nombre,
         descripcion : descripcion,
-        token : localStorage.getItem("jwt")
     }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
   
   async obtenerReceta(id: string){
-    return axios.get(`${this.url}/receta/` + id);
+    return axios.get(`${this.url}/receta/` + id, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
   async eliminarIngrediente(id: string) {
@@ -86,8 +82,6 @@ export class Servicio {
         proteinas: proteinas,
         grasas: grasas,
         carbohidratos: carbohidratos,
-        token : localStorage.getItem("jwt")
-      
       }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
 
     }catch(error){
@@ -117,9 +111,8 @@ export class Servicio {
   }
 
   async cambiarPassword(token: string, password: string){
-
     try {
-      const response = await axios.post(`${this.url}/recuperarPassword/Cambiar`, {token: token, password: password});
+      const response = await axios.post(`${this.url}/recuperarPassword/Cambiar`, {password: password}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
       return response.data;
     } catch (error) {
       console.error('Error al cambiar la contraseña:', error);
@@ -133,7 +126,7 @@ export class Servicio {
 
     try {
 
-      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail, altura: altura, peso:peso, objetivo: objetivo, edad: edad, genero:genero});
+      const response = await axios.post(`${this.url}/signup`, {nombre: nombre, password: password, mail: mail, altura: altura, peso:peso, objetivo: objetivo, edad: edad, genero:genero}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
 
       
       localStorage.setItem("jwt", response.data)
@@ -171,7 +164,7 @@ export class Servicio {
   }
 
   enviarCorreoPassword(mail: string) {
-    return axios.post(this.url + '/recuperarPassword/', {mail: mail})
+    return axios.post(this.url + '/recuperarPassword/', {mail: mail}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
       .then(response => response.data)
       .catch(error => {
         console.error('Error al enviar el correo:', error);
@@ -192,7 +185,7 @@ export class Servicio {
 
   async obtenerLibros(mailUs : string){
     
-    return await axios.get(`${this.url}/libro/pormail/` + mailUs)
+    return await axios.get(`${this.url}/libro/pormail/` + mailUs, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
 
   }
 
@@ -214,8 +207,7 @@ export class Servicio {
         axios.post(`${this.url}/libro/agregarReceta`,{
         libroId : idLibro,
         recetaId : idReceta,
-        token : localStorage.getItem("jwt")
-    });
+    }, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
 
@@ -226,16 +218,16 @@ export class Servicio {
   }
 
   async obtenerLibroPorId(idLibro : string){
-    return await axios.get(`${this.url}/libro/porid/` + idLibro)
+    return await axios.get(`${this.url}/libro/porid/` + idLibro, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
   }
 
   async obtenerConsumoUsuario(mail: string){
-    return await axios.get(`${this.url}/consumo/` + mail)
+    return await axios.get(`${this.url}/consumo/` + mail, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
   }
 
 
   async agregarConsumo(idReceta : number, mail : string){
-    return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail})
+    return await axios.post(`${this.url}/consumo/`, {idReceta: idReceta, mail: mail}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}})
   }
 
   async like( idReceta : number, mail : string){
@@ -251,25 +243,25 @@ export class Servicio {
   }
 
   async obtenerRecomendaciones(kcaloriasUsuario: number, paginaRecomendaciones: number){
-    return await axios.get(`${this.url}/receta/pagr/` + kcaloriasUsuario + `/` + paginaRecomendaciones);
+    return await axios.get(`${this.url}/receta/pagr/` + kcaloriasUsuario + `/` + paginaRecomendaciones, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
 
   async obtenerIngredientesDeReceta(idReceta: string){
-    return await axios.get(`${this.url}/receta/ingredientes/` + idReceta);
+    return await axios.get(`${this.url}/receta/ingredientes/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
 
   async borrarConsumo(mail: string, idReceta: number){
-    return await axios.delete(`${this.url}/consumo/` + mail + `/` + idReceta);
+    return await axios.delete(`${this.url}/consumo/` + mail + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
   async obtenerRecetaDelDia(){
-    return await axios.get(`${this.url}/receta/del/dia`);
+    return await axios.get(`${this.url}/receta/del/dia`, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
   async eliminarRecetaDelLibro(idLibro : string, idReceta : string){
-    return await axios.delete(`${this.url}/libro/eliminarReceta/` + idLibro + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
+    return await axios.delete(`${this.url}/libro/eliminarReceta/` + idLibro + `/` + idReceta, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}}, {headers : {authorization : "Bearer " + localStorage.getItem("jwt")}});
   }
 
   async eliminarLibro(idLibro : string){ 

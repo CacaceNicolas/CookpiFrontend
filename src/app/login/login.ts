@@ -26,7 +26,6 @@ export class Login {
 
     if (this.nombre.value && this.password.value) {
       try {
-        console.log("ASDASD")
         const response = await this.apiservice.iniciarSesion(this.nombre.value, this.password.value);
         localStorage.setItem("jwt", response)
         this.router.navigate(['/']);

@@ -28,7 +28,7 @@ export class PaginaPrincipalComponent {
   paginaRecomendaciones = 0;
   kcaloriasUsuario = 0;
   mail : string = "";
-  consumos: {calorias : number}[] =  [];
+  consumos: {calorias : number, cantidad : number}[] =  [];
   recetaDelDia: {nombre : string, descripcion : string, tiempo : number, carbohidratos : number, proteinas : number, grasas : number, calorias : number}  = {nombre : "", descripcion : "", tiempo : 0, carbohidratos : 0, proteinas : 0, grasas : 0, calorias : 0};
   reqCalorico : number = 0;
   caloriasRestantes : number = 0;
@@ -54,9 +54,7 @@ export class PaginaPrincipalComponent {
     this.mail = mailResp.data
     
     this.usuario = (await this.servicio.obtenerUsuario(this.mail)).data
-
     this.consumos = (await this.servicio.obtenerConsumoUsuario(this.mail)).data
-
     this.kcaloriasUsuario = this.usuario.reqCalorico
     this.calcularCalorias()
     this.actualizarRecomendaciones()
@@ -84,12 +82,12 @@ export class PaginaPrincipalComponent {
     }
 
     async actualizarRecomendaciones() {
+      console.log(this.kcaloriasUsuario);
       const itemsAnterior = this.recomendacionesKcal;
       this.recomendacionesKcal = (await this.servicio.obtenerRecomendaciones(this.kcaloriasUsuario, this.paginaRecomendaciones)).data;
       if (this.recomendacionesKcal.length == 0 && this.paginaRecomendaciones > 0) {
         this.recomendacionesKcal = itemsAnterior;
-        this.paginaRecomendaciones -= 1;
-        
+        this.paginaRecomendaciones -= 1;        
       }
     }
   buscar(cadena : string){
@@ -111,7 +109,7 @@ export class PaginaPrincipalComponent {
   }
 
 
-    async restarPaginaRec(){
+  async restarPaginaRec(){
     if (this.paginaRecomendaciones > 0){
       this.paginaRecomendaciones -= 1
     }
@@ -119,8 +117,11 @@ export class PaginaPrincipalComponent {
   }
 
   async sumarPaginaRec(){
+
     this.paginaRecomendaciones += 1
+
     this.actualizarRecomendaciones()
+
   }
 
 
@@ -139,14 +140,14 @@ export class PaginaPrincipalComponent {
   }
 
   calcularCalorias(){
-
     this.consumos.forEach((consumo) => {
-      this.kcaloriasUsuario -= consumo.calorias
+      this.kcaloriasUsuario -= consumo.calorias * consumo.cantidad
     });
-
   }
 
+
   async obtenerRecetaDelDia(){
+    
     console.log(await this.servicio.obtenerRecetaDelDia());
 
     this.recetaDelDia = (await this.servicio.obtenerRecetaDelDia()).data;
@@ -156,7 +157,7 @@ export class PaginaPrincipalComponent {
   irAPaginaUsuario(){
     this.router.navigate(['/usuario']);
   }
-
+  
   irAPaginaPrincipal(){
     this.router.navigate(['/']);
   }
