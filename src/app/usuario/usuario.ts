@@ -93,9 +93,8 @@ export class Usuario {
     this.router.navigate(['/receta/' + idReceta]);
   }
 
-  eliminarLibro(idLibro: number){
-    console.log("Eliminando libro id: " + idLibro);
-    this.apiservice.eliminarLibro(idLibro.toString());
+  async eliminarLibro(idLibro: number){
+    await this.apiservice.eliminarLibro(idLibro.toString());
     this.libros = [];
     this.obtenerLibros();
   }

@@ -33,7 +33,6 @@ export class Receta {
   carbohidratos : number = 0;
   proteinas : number = 0;
   grasas : number = 0;
-  mailCreador : string = "";
   
 
 
@@ -71,10 +70,17 @@ export class Receta {
   } 
 
   async agregarALibro(){  
-    this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
+    if (this.libroSeleccionado == ""){
+      window.alert("Seleccione un libro")
+    }
+    else{
+      window.alert("Receta agregada al libro")
+      this.apiservice.agregarRecetaALibro(this.libroSeleccionado, this.idReceta);
+    }
   }
 
   async agregarConsumo(){
+    window.alert("Consumo cargado")
     this.apiservice.agregarConsumo(+this.idReceta, this.mail)
   }
 
@@ -108,8 +114,8 @@ export class Receta {
 
   async actualizar(){
     const resp = await this.apiservice.obtenerReceta(this.idReceta);
+    
     this.procedimiento = resp.data.procedimiento;
-    this.mailCreador = resp.data.
     this.descripcion = resp.data.descripcion;
     this.nombre = resp.data.nombre;
     this.calorias = resp.data.calorias;
