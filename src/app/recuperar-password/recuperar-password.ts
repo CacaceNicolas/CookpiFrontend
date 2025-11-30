@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Servicio } from '../servicio';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-recuperar-password',
@@ -17,31 +18,27 @@ import { Servicio } from '../servicio';
 export class RecuperarPassword {
   password = new FormControl('');
   token: string = '';
-
-  constructor(private route: ActivatedRoute, private apiservice: Servicio) {}
+  constructor(private route: ActivatedRoute, private apiservice: Servicio, private router: Router) {}
 
   ngOnInit() {
     this.token = this.route.snapshot.paramMap.get('token')!;
   }
   
 
-  botonCambiarPassword() {
+  async botonCambiarPassword() {
 
     if (this.password.value) {
-      this.apiservice.cambiarPassword(this.token, this.password.value)
-        .then(response => {
-          console.log('Contraseña cambiada exitosamente:', response);
-        })
-        .catch(error => {
-          console.error('Error al cambiar la contraseña:', error);
-        });
+      try { 
+      await this.apiservice.cambiarPassword(this.token, this.password.value)
+      window.alert('Contraseña cambiada exitosamente');
+      this.router.navigate(['/login']);
+    } catch (error: any) {
+        window.alert('Error al cambiar la contraseña: ' + error.response.data);
+      }
     } 
-
-
+    else {
+      window.alert('Por favor ingrese una nueva contraseña');
+      return;
+    }
   }
-
-
-
-
-
 }

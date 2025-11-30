@@ -34,7 +34,7 @@ export class Usuario {
 
     const mailResp = await this.apiservice.obtenerMail()
     this.mail = mailResp.data
-    this.usuario = (await this.apiservice.obtenerUsuario(this.mail)).data
+    this.usuario = (await this.apiservice.obtenerUsuario()).data
     await this.actualizarInfo();
     console.log(this.consumos);
     this.nombre = this.usuario.nombre
@@ -60,26 +60,26 @@ export class Usuario {
 
   async agregarConsumo(idReceta: number){
     console.log("Agregando consumo de receta id: " + idReceta);
-    await this.apiservice.agregarConsumo(+idReceta, this.mail);
+    await this.apiservice.agregarConsumo(+idReceta);
     await this.actualizarInfo();  
     console.log("llego hasta acá");
   }
 
   async borrarConsumo(idReceta: number){
     console.log("Borrando consumo de receta id: " + idReceta);
-    await this.apiservice.borrarConsumo(this.mail, idReceta);
+    await this.apiservice.borrarConsumo(idReceta);
     await this.actualizarInfo();
   }
 
   async obtenerLibros(){
-    const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
+    const resp = (await this.apiservice.obtenerLibros()).data;
     this.libros = resp;
     console.log(this.libros);
   }
 
 
   async actualizarInfo(){
-    this.consumos = (await this.apiservice.obtenerConsumoUsuario(this.mail)).data
+    this.consumos = (await this.apiservice.obtenerConsumoUsuario()).data
     this.caloriasRestantes = this.reqCalorico
     this.calcularCalorias();
     console.log(this.consumos)
