@@ -60,4 +60,27 @@
       
     </div>
   </section>
-</div>
+
+  
+  <button (click)="irAPaginaUsuario()">Volver</button>
+  <button (click)="editarLibro()">Editar</button>
+
+  <div>
+  <form class="formulario" *ngIf="editando">
+    <label for="nombre">Nombre</label>
+    <input
+      id="nombre"
+      [formControl]="nombreEditar"
+    />
+
+    <label for="descripcion">Descripción</label>
+    <textarea
+      id="descripcion"
+      [formControl]="descripcionEditar"
+    ></textarea>
+    
+  
+    <button (click)="guardarCambios()">Guardar</button>
+    <button (click)="cancelarEdicion()">Cancelar</button>
+    </form>
+  </div>

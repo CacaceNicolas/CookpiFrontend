@@ -37,28 +37,20 @@ export class PaginaPrincipalComponent {
 
   async ngOnInit() {
     
-    const mailResp = await this.servicio.obtenerMail()
-    this.mail = mailResp.data
-    this.consumos = (await this.servicio.obtenerConsumoUsuario(this.mail)).data
-    this.usuario = (await this.servicio.obtenerUsuario(this.mail)).data
-
-    this.reqCalorico = this.usuario.reqCalorico
-    this.caloriasRestantes = this.reqCalorico
-    
-    
-    this.calcularCalorias()
-    
     try {
-      this.actualizarLista()
       const mailResp = await this.servicio.obtenerMail()
-    this.mail = mailResp.data
-    
-    this.usuario = (await this.servicio.obtenerUsuario(this.mail)).data
-    this.consumos = (await this.servicio.obtenerConsumoUsuario(this.mail)).data
-    this.kcaloriasUsuario = this.usuario.reqCalorico
-    this.calcularCalorias()
-    this.actualizarRecomendaciones()
-    this.obtenerRecetaDelDia()
+      this.mail = mailResp.data
+      this.consumos = (await this.servicio.obtenerConsumoUsuario()).data
+      this.usuario = (await this.servicio.obtenerUsuario()).data
+      console.log((await this.servicio.obtenerUsuario()).data);
+      this.reqCalorico = this.usuario.reqCalorico
+      this.caloriasRestantes = this.reqCalorico
+      this.kcaloriasUsuario = this.usuario.reqCalorico
+      
+      this.calcularCalorias()
+      this.actualizarLista()
+      this.actualizarRecomendaciones()
+      this.obtenerRecetaDelDia()
     } catch (error) {
       console.error('Error cargando las recetas', error);
     }  
@@ -140,6 +132,7 @@ export class PaginaPrincipalComponent {
   }
 
   calcularCalorias(){
+    console.log("Calculando calorías... " + this.kcaloriasUsuario);
     this.consumos.forEach((consumo) => {
       this.kcaloriasUsuario -= consumo.calorias * consumo.cantidad
     });

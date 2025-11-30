@@ -123,7 +123,8 @@
   <h3 class="subtitulo">Procedimiento:</h3>
   <p class="texto">{{ procedimiento }}</p>
 
-
+  <h3>Creada por: {{ nombreCreador }}</h3>
+  
   <div class="acciones">
     <select [(ngModel)]="libroSeleccionado" class="selector-libro">
       <option value="">Seleccionar libro...</option>
@@ -140,7 +141,61 @@
        Agregar consumo
     </button>
 
+    <button *ngIf="creador" class="btn-agregar" (click)="editar()">
+       Editar receta
+    </button>
+    
+ 
+
+
+    <div *ngIf="editando && creador" >
+    <div class="campo-horizontal">
+    <label for="nombre">NOMBRE RECETA:</label>
+    <input type="text" id="nombre" [formControl]="nombreEditar" />
   </div>
+
+  <div class="campo-horizontal momento-dia">
+    <label for="momento">Momento del día:</label>
+    <select [formControl]="momentoDelDiaEditar">
+      <option value="Desayuno/Merienda">Desayuno/Merienda</option>
+      <option value="Almuerzo/Cena">Almuerzo/Cena</option>
+      <option value="Postre">Postre</option>
+      <option value="Snack">Snack</option>
+    </select>
+
+  </div>
+
+  <div class="campo-horizontal momento-dia">
+    <label for="momento">Dieta:</label>
+    <select [formControl]="dietaEditar">
+      <option value="Vegetariana">Vegetariana</option>
+      <option value="Keto">Keto</option>
+      <option value="No-dieta">No dieta</option>
+      <option value="No-Carbs">No Carbs</option>
+      <option value="High-Prote">High Prote</option>
+    </select>
+    
+  </div>
+  <label for="momento">Tiempo: </label>
+  <input [formControl]="tiempoEditar" type="number" min="1" placeholder="Tiempo en minutos" />
+  
+  <div class="campo-vertical">
+    <label for="descripcion">Descripcion:</label>
+    <textarea id="descripcion" [formControl]="descripcionEditar"></textarea>
+  </div>
+
+  <div class="campo-vertical">
+    <label for="procedimiento">Procedimiento:</label>
+    <textarea id="procedimiento" [formControl]="procedimientoEditar"></textarea>
+  </div>
+
+
+    <button (click)="guardarCambios()">Guardar</button>
+    <button (click)="cancelarEdicion()">Cancelar</button>
+
+  </div>
+
+</div>
 
   <footer class="footer">
     <a href="#">Volver atrás</a> |

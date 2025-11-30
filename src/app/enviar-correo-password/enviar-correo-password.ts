@@ -17,21 +17,19 @@ export class EnviarCorreoPassword {
   
   constructor(private apiservice: Servicio) {}
   
-  botonEnviarCorreoPassword() {
+  async botonEnviarCorreoPassword() {
 
     if (this.mail.value) {
-      this.apiservice.enviarCorreoPassword(this.mail.value)
-        .then(response => {
-          console.log('Contraseña cambiada exitosamente:', response);
-        })
-        .catch(error => {
-          console.error('Error al cambiar la contraseña:', error);
-        });
-    } 
-
-
+    console.log(this.mail.value);
+    try { 
+      let resp = await this.apiservice.enviarCorreoPassword(this.mail.value);
+      window.alert('Correo enviado correctamente');
+    } catch (error: any) {
+      window.alert(error.response.data);
+    }
+    } else {
+      window.alert('Por favor ingrese un correo');
+      return;
+    }
   }
-
-
-
 }

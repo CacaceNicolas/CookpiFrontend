@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Ingredientes } from '../ingredientes/ingredientes';
 import { Router } from '@angular/router';
-
+import { FormControl } from '@angular/forms';
 
 
 @Component({
@@ -17,6 +17,7 @@ import { Router } from '@angular/router';
 })
 
 export class Receta {
+  editando : boolean = false;
   idReceta: string = "";
   procedimiento: string = "";
   nombre: string = "";
@@ -24,6 +25,7 @@ export class Receta {
   libros: { id: string, nombre: string }[] = [];
   mostrarSelect: boolean = false;
   mail : string = "";
+  mailCreador : string = "";
   libroSeleccionado : string = "";
   constructor(private apiservice: Servicio, private route: ActivatedRoute, private router: Router) {};
   yaLikeada : boolean = false;
@@ -33,18 +35,25 @@ export class Receta {
   carbohidratos : number = 0;
   proteinas : number = 0;
   grasas : number = 0;
+  nombreCreador : string = "";
+  tiempoEditar = new FormControl(0);
+  nombreEditar = new FormControl("");
+  momentoDelDiaEditar = new FormControl("");
+  dietaEditar = new FormControl("");
+  creador : boolean = false;
+  tiempo : number = 0;
+  momentoDelDia : string = "";
+  dieta : string = "";
+  descripcionEditar = new FormControl("");
+  procedimientoEditar = new FormControl("");
   
-
-
   async ngOnInit() {
     try {
       this.idReceta = this.route.snapshot.paramMap.get('id') || '';
       
       const mailResp = await this.apiservice.obtenerMail()
       this.mail = mailResp.data
-      console.log(mailResp)
       this.actualizar()
-      console.log(this.mail);
       this.isYaLikeada();
       this.obtenerIngredientes();
     } catch (error) {
@@ -53,7 +62,7 @@ export class Receta {
 
     try {
       
-      const resp = (await this.apiservice.obtenerLibros(this.mail)).data;
+      const resp = (await this.apiservice.obtenerLibros()).data;
       console.log(resp);
       console.log("Longitud: " + resp.length)
       
@@ -81,7 +90,7 @@ export class Receta {
 
   async agregarConsumo(){
     window.alert("Consumo cargado")
-    this.apiservice.agregarConsumo(+this.idReceta, this.mail)
+    this.apiservice.agregarConsumo(+this.idReceta)
   }
 
 
@@ -90,7 +99,7 @@ export class Receta {
     this.yaLikeada = true;
     this.likes = (this.likes || 0) + 1;
     try {
-      await this.apiservice.like(+this.idReceta, this.mail);
+      await this.apiservice.like(+this.idReceta);
 
     } catch (err) {
 
@@ -102,7 +111,7 @@ export class Receta {
     this.yaLikeada = false;
     this.likes = ((this.likes || 1) - 1);
     try {
-      await this.apiservice.eliminarLike(+this.idReceta, this.mail);
+      await this.apiservice.eliminarLike(+this.idReceta);
     } catch (err) {
 
       this.yaLikeada = true;
@@ -122,7 +131,19 @@ export class Receta {
     this.carbohidratos = resp.data.carbohidratos;
     this.proteinas = resp.data.proteinas;
     this.grasas = resp.data.grasas;
+    this.tiempo = resp.data.tiempo;
+    this.momentoDelDia = resp.data.momentoDelDia;
+    this.dieta = resp.data.dieta;
     this.likes = resp.data.cantLikes;
+    this.mailCreador = resp.data.usuarioCreadorId;
+    this.nombreCreador = (await this.apiservice.obtenerNombreUsuario(this.mailCreador)).data;
+    this.creador = (this.mailCreador == this.mail);
+    this.tiempoEditar.setValue(resp.data.tiempo);
+    this.nombreEditar.setValue(this.nombre);
+    this.momentoDelDiaEditar.setValue(this.momentoDelDia);
+    this.dietaEditar.setValue(this.dieta);
+    this.descripcionEditar.setValue(this.descripcion);
+    this.procedimientoEditar.setValue(this.procedimiento);
   }
 
 
@@ -131,7 +152,7 @@ export class Receta {
 
   async isYaLikeada(){
     
-    this.yaLikeada = (await this.apiservice.yaLikeada(+this.idReceta, this.mail)).data
+    this.yaLikeada = (await this.apiservice.yaLikeada(+this.idReceta)).data
   }
 
   async obtenerIngredientes(){
@@ -147,5 +168,49 @@ export class Receta {
     this.router.navigate(['/usuario']);
   }
 
+  guardarCambios(){
+    if (!this.validarCampos()) {
+      return;
+    }
+    this.nombre = this.nombreEditar.value ?? "";
+    this.descripcion = this.descripcionEditar.value ?? "";
+    this.procedimiento = this.procedimientoEditar.value ?? "";
+    this.tiempo = this.tiempoEditar.value ?? 0;
+    this.momentoDelDia = this.momentoDelDiaEditar.value ?? "";
+    this.dieta = this.dietaEditar.value ?? "";
+    try {  
+    this.apiservice.editarReceta(this.idReceta, this.nombre, this.descripcion, this.procedimiento, this.tiempo, this.momentoDelDia, this.dieta);
+    window.alert("Receta editada correctamente");
+  } catch (error) {
+    window.alert("Error al editar la receta");
+    console.error("Error al editar la receta:", error);
+  }
+    this.editando = false;
+  }
+  validarCampos(): boolean {
+    if (this.nombreEditar.value === "" || !this.nombreEditar.value ||
+        this.descripcionEditar.value === "" || !this.descripcionEditar.value ||
+        this.procedimientoEditar.value === "" || !this.procedimientoEditar.value ||
+        this.momentoDelDiaEditar.value === "" || !this.momentoDelDiaEditar.value ||
+        this.dietaEditar.value === "" || !this.dietaEditar.value) {
+      window.alert("Todos los campos son obligatorios");
+      return false;
+    }
+    return true;
+  }
+
+  cancelarEdicion(){
+    this.editando = false;
+    this.nombreEditar.setValue(this.nombre);
+    this.descripcionEditar.setValue(this.descripcion);
+    this.procedimientoEditar.setValue(this.procedimiento);
+    this.tiempoEditar.setValue(this.tiempo);
+    this.momentoDelDiaEditar.setValue(this.momentoDelDia);
+    this.dietaEditar.setValue(this.dieta);
+  }
+
+  editar(){
+    this.editando = true;
+  }
 
 }
