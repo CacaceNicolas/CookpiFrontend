@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Servicio } from '../servicio';
+import { Router } from '@angular/router';
+
+
 
 @Component({
   selector: 'app-validaste-cuenta',
@@ -9,7 +12,7 @@ import { Servicio } from '../servicio';
 })
 export class ValidasteCuenta {
 
-  constructor(private apiservice : Servicio){}
+  constructor(private router: Router, private apiservice: Servicio) {}
 
   ngOnInit(): void{
 
@@ -17,5 +20,9 @@ export class ValidasteCuenta {
 
   }
 
+  
+  irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
 
 }

@@ -26,4 +26,7 @@ export class ValideSuCuenta {
       return;
     }
   }
+    irAPaginaPrincipal(){
+    this.router.navigate(['/']);
+  }
 }

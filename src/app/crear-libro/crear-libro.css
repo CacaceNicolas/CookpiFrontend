@@ -41,35 +41,42 @@
 }
 
 label {
+  
   font-weight: 600;
-  color: var(--marron-oscuro);
+  colr: var(--marron-oscuro);
 }
 
 input,
 textarea {
+    margin: 0.5em;
+    margin-right: 1em;
   width: 100%;
   padding: 0.7rem 1rem;
   border-radius: 0.8rem;
-  border: 1px solid var(--verde-oliva);
+  border: solid ;
+  border-color: #000000;
   background-color: #fffaf0;
-
-  resize: none;
+  width: 35em;
 }
 
 input:focus,
 textarea:focus {
   outline: none;
+
   border-color: var(--mostaza);
   box-shadow: 0 0 5px var(--mostaza);
 }
 
 button {
   margin-top: 1.2rem;
-  padding: 0.8rem 1.2rem;
+  padding: 0.8rem;
   background-color: var(--mostaza);
+
   color: var(--blanco);
   font-weight: bold;
-  border: none;
+  border: solid;
+  border-color: #ddc700;
+  color:#ddc700;
   border-radius: 1rem;
   cursor: pointer;
   transition: 0.3s;

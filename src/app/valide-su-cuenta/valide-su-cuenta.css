@@ -1,0 +1,139 @@
+body {
+  font-family: Arial, sans-serif;
+
+  margin: 0;
+  margin-top: 8em;
+  padding: 0;
+  text-align: center;
+}
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
+
+
+#logo-container {
+  display: block;          
+  margin: 1rem auto;       
+  max-height: 70px;        
+  height: auto;
+  width: auto;
+  max-width: 100%;         
+  object-fit: contain;     
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    max-height: 50px;      
+    margin: 0.5rem auto;
+  }
+}
+
+.top-bar {
+position:fixed;
+  z-index: 1000;  
+  width: 96%;
+  top:0;
+  background-color: #fff;
+  padding: 0.8em 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1em;
+
+  margin-bottom: 3em;
+}
+
+.top-bar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%); 
+  width: 96%;
+  height: 3px; 
+
+  background-color: #ddc700; 
+  border-radius: 2px;
+}
+
+
+.icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  cursor: pointer;
+}
+
+
+
+.content-box {
+  margin: 9em auto 0 auto;
+  padding: 2.5em 2em;
+  width: 90%;
+  max-width: 550px;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.content-box h2 {
+  margin: 0 0 1em 0;
+  font-size: 1.8em;
+  color: #333;
+  font-weight: bold;
+}
+
+.content-box h4 {
+  margin-bottom: 2em;
+  font-size: 1.2em;
+  color: #555;
+}
+
+
+button {
+  background-color: #ffffff;
+  color: #ddc700;
+  border-color: #ddc700;
+  border:solid;
+  padding: 0.9em 1.6em;
+  margin-top: 1em;
+  font-size: 1.1em;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 80%;
+  max-width: 300px;
+  transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    color: #ffffff;
+  background-color: #c4b000;
+}
+
+
+@media (max-width: 600px) {
+  #logo-container {
+    height: 45px;
+  }
+
+  button {
+    width: 90%;
+  }
+}

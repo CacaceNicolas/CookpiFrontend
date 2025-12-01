@@ -1,6 +1,26 @@
-<p>valide-su-cuenta works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuenta validada</title>
+  <link rel="stylesheet" href="valide-su-cuenta.css" />
+</head>
 
-<button (click)="cerrarSesion()">Cerrar sesión</button>
+<body>
 
-<button (click)="reenviarCorreo()">Reenviar correo</button>
 
+  <header class="top-bar">
+      <img id="logo-container" src="logoCookpi.png" alt="Logo" (click)="irAPaginaPrincipal()" />
+ 
+  </header>
+
+<div class="content-box">
+    <h2>Validá tu cuenta</h2>
+    <h4>Se te a enviado un correo electronico para validarla. </h4>
+
+    <button (click)="reenviarCorreo()">Reenviar correo</button>
+    <button (click)="cerrarSesion()">Cerrar sesión</button>
+</div>
+
+</body>
